@@ -1,0 +1,5 @@
+id;firstname;lastname;email;dept;salary
+001;Joh;Tori;job.tori@gmail.com;001;1000
+002;Ricardo;Diaz;rica.dia@gmail.com;001;5000
+003;Lance;Jordan;lan.jo@gmail.com;002;3500
+004;Bruce;Chung;bruch@gmail.com;002;4500
