@@ -9,7 +9,6 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -17,14 +16,11 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +29,7 @@ import java.util.Map;
 @Configuration
 @EnableBatchProcessing
 public class UserBatchConfig {
-    Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
+    private Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
     @Bean
     Job job(JobBuilderFactory jobBuilderFactory,
             StepBuilderFactory stepBuilderFactory,
@@ -56,6 +52,7 @@ public class UserBatchConfig {
      */
     @Bean
     FlatFileItemReader<User> userItemReader(@Value("${file_path_csv_user}") Resource resource) {
+        logger.info("########## userItemReader is running");
         FlatFileItemReader<User> flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setResource(resource);
         flatFileItemReader.setLinesToSkip(1);
@@ -73,6 +70,8 @@ public class UserBatchConfig {
         return new ItemProcessor<User, User>() {
             @Override
             public User process(User user) throws Exception {
+                logger.info("########## userItemProcessor is running");
+
                 Map<String, String> map = new HashMap<>();
                 map.put("001", "Data Migration");
                 map.put("002", "Dev Opt");
@@ -92,10 +91,10 @@ public class UserBatchConfig {
      */
     @Bean
     ItemWriter<User> userItemWriter() {
-        logger.info("====================> userItemWriter is running");
         return new ItemWriter<User>() {
             @Override
             public void write(List<? extends User> list) throws Exception {
+                logger.info("########## userItemWriter is running");
                 userRepository.saveAll(list);
             }
         };

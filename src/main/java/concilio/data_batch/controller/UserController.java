@@ -32,7 +32,7 @@ public class UserController {
         map.put("executed_time", new JobParameter(new Date()));
         JobParameters jobParameters = new JobParameters(map);
         JobExecution jobExe = jobLauncher.run(job, jobParameters);
-        logger.info("====================> Loading data");
+        logger.info("########## Loading data");
         return jobExe.getStatus();
     }
 
