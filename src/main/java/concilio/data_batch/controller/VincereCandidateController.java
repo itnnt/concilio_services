@@ -3,26 +3,43 @@ package concilio.data_batch.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import concilio.data_batch.model.VincereCandidate;
 import okhttp3.*;
+import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
 
+/**
+ * This request in this controller run synchronously because of these limitation
+ * The request rate limit is 10 requests per second.
+ * The quota is 50,000 requests per day
+ * https://api.vincere.io/documentation.html#section/Throttling-(Rate-Limits)
+ */
 @RestController
 @RequestMapping("vincere")
 public class VincereCandidateController {
     private Logger logger = LoggerFactory.getLogger(VincereCandidateController.class);
+//    private String idToken;
 
     @GetMapping(path = "refresh_token")
+//    @PostConstruct
     public String refreshAuthorizedToken() {
+        try {
+            Thread.sleep(5 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String idToken = "";
         RequestBody requestBody = new FormBody.Builder()
                 .add("message", "Your message")
@@ -51,34 +68,34 @@ public class VincereCandidateController {
                 output.append(tem);
             }
             JSONObject object = new JSONObject(output.toString());
-            System.out.println("-------------");
-            System.out.println(object.getString("id_token"));
+            logger.info("---------------------------------------------------------------------------------");
+            logger.info(object.getString("id_token"));
+            logger.info("---------------------------------------------------------------------------------");
             idToken = object.getString("id_token");
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+//        this.idToken = idToken;
         return idToken;
     }
 
-    @GetMapping(path = "candidate/create")
-    public String createCandidate() {
+    @GetMapping(path = "candidate/create_or_update")
+    public String createOrUpdateCandidate() {
         VincereCandidate cand = new VincereCandidate();
-        cand.setFirstName("Alex12");
+        cand.setId(579676);
+        cand.setFirstName("Alex12qwqwqw");
         cand.setLastName("Luxubu");
         cand.setEmail("alexlu12@gmail.com");
         cand.setRegistrationDate(new Date());
         cand.setCandidateSourceId(29090);
+        boolean isUpdated = cand.getId() != null;
 
+        // refresh the authorized token id
         String resStr = "";
         String idToken = "";
         for (int i=0; i<10; i++) {
             try {
                 idToken = refreshAuthorizedToken();
-                try {
-                    Thread.sleep(5*1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 break;
             } catch (Exception ex) {
                 logger.error(ex.getMessage());
@@ -91,6 +108,7 @@ public class VincereCandidateController {
             }
         }
 
+        // submit create or update request
         OkHttpClient client = new OkHttpClient();
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -102,14 +120,28 @@ public class VincereCandidateController {
             resStr = e.getMessage();
         }
         RequestBody body = RequestBody.create(json, JSON);
+        logger.info("Current idToken:");
+        logger.info(idToken);
 
-        Request request = new Request.Builder()
-                .url("https://tung.vincere.io/api/v2/candidate")
-                .post(body)
-                .addHeader("content-type", "application/json")
-                .addHeader("x-api-key", "6a4e090adac7ff604fc21af400968a36")
-                .addHeader("id-token", idToken)
-                .build();
+        Request request;
+        if (isUpdated) {
+             request = new Request.Builder()
+                    .url(String.format("https://tung.vincere.io/api/v2/candidate/%d", cand.getId()))
+                    .put(body)
+                    .addHeader("content-type", "application/json")
+                    .addHeader("x-api-key", "6a4e090adac7ff604fc21af400968a36")
+                    .addHeader("id-token", idToken)
+                    .build();
+        } else {
+             request = new Request.Builder()
+                    .url("https://tung.vincere.io/api/v2/candidate")
+                    .post(body)
+                    .addHeader("content-type", "application/json")
+                    .addHeader("x-api-key", "6a4e090adac7ff604fc21af400968a36")
+                    .addHeader("id-token", idToken)
+                    .build();
+        }
+
         try {
             Response response = client.newCall(request).execute();
             ResponseBody responseBody = response.body();
@@ -123,9 +155,5 @@ public class VincereCandidateController {
             System.out.println(ex.getMessage());
         }
         return resStr;
-    }
-
-    public void updateCandidate() {
-
     }
 }

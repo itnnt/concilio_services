@@ -10,6 +10,8 @@ import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VincereCandidate {
+    private Integer id;
+
     // affiliations
     private String affiliations;
 
@@ -981,6 +983,14 @@ public class VincereCandidate {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String toJson() throws JsonProcessingException {
