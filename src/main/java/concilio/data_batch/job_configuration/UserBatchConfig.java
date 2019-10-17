@@ -1,11 +1,12 @@
 package concilio.data_batch.job_configuration;
 
-import concilio.data_batch.model.User;
-import concilio.data_batch.repository.UserRepository;
+import concilio.data_batch.model.concilio.User;
+import concilio.data_batch.repository.concilio.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -17,18 +18,22 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Configuration
+@EnableAutoConfiguration
 @EnableBatchProcessing
-public class UserBatchConfig {
+public class UserBatchConfig extends DefaultBatchConfigurer {
     private Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
     @Bean
     Job job(JobBuilderFactory jobBuilderFactory,
@@ -87,7 +92,6 @@ public class UserBatchConfig {
 
     /**
      * implement itemWriter
-     * @return
      */
     @Bean
     ItemWriter<User> userItemWriter() {
@@ -113,5 +117,10 @@ public class UserBatchConfig {
         defaultLineMapper.setFieldSetMapper(beanWrapper);
         defaultLineMapper.setLineTokenizer(delimitedLineTokenizer);
         return defaultLineMapper;
+    }
+
+    @Override
+    public void setDataSource(@Qualifier("concilioDataSource") DataSource dataSource) {
+        super.setDataSource(dataSource);
     }
 }
