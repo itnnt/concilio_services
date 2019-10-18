@@ -42,7 +42,7 @@ public class CardDataSourceConfiguration {
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(cardDataSource())
-                .packages("concilio.data_batch.model")
+                .packages("concilio.data_batch.model.card")
                 .build();
     }
 
