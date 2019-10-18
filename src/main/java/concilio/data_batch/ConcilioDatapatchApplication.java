@@ -23,8 +23,6 @@ public class ConcilioDatapatchApplication {
 
     /**
      * Start H2 server allow tcp connections
-     * @return
-     * @throws SQLException
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     public Server inMemoryH2DatabaseServer() throws SQLException {

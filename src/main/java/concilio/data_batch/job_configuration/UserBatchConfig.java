@@ -1,7 +1,7 @@
 package concilio.data_batch.job_configuration;
 
-import concilio.data_batch.model.User;
-import concilio.data_batch.repository.UserRepository;
+import concilio.data_batch.model.card.User;
+import concilio.data_batch.repository.card.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
