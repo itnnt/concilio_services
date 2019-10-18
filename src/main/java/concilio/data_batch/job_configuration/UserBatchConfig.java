@@ -1,7 +1,7 @@
 package concilio.data_batch.job_configuration;
 
-import concilio.data_batch.model.concilio.User;
-import concilio.data_batch.repository.concilio.UserRepository;
+import concilio.data_batch.model.card.User;
+import concilio.data_batch.repository.card.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -33,7 +33,7 @@ import java.util.Map;
 @Configuration
 @EnableAutoConfiguration
 @EnableBatchProcessing
-public class UserBatchConfig extends DefaultBatchConfigurer {
+public class UserBatchConfig  {
     private Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
     @Bean
     Job job(JobBuilderFactory jobBuilderFactory,
@@ -119,8 +119,5 @@ public class UserBatchConfig extends DefaultBatchConfigurer {
         return defaultLineMapper;
     }
 
-    @Override
-    public void setDataSource(@Qualifier("concilioDataSource") DataSource dataSource) {
-        super.setDataSource(dataSource);
-    }
+
 }

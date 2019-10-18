@@ -1,6 +1,6 @@
 package concilio.data_batch.controller;
 
-import concilio.data_batch.model.concilio.User;
+import concilio.data_batch.model.card.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.*;

@@ -1,4 +1,4 @@
-package concilio.data_batch.model.concilio;
+package concilio.data_batch.model.card;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
