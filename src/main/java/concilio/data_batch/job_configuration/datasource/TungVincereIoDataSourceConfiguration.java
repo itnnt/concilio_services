@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
 //@Configuration
 //@EnableTransactionManagement
 //@EnableJpaRepositories(basePackages = "concilio.data_batch.repository.tung_vincere_io",
