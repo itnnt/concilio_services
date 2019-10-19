@@ -24,11 +24,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "concilio.data_batch.repository.tung_vincere_io",
-        entityManagerFactoryRef = "tungVincereIoEntityManagerFactory",
-        transactionManagerRef= "tungVincereIoEntityManagerFactory")
+//@Configuration
+//@EnableTransactionManagement
+//@EnableJpaRepositories(basePackages = "concilio.data_batch.repository.tung_vincere_io",
+//        entityManagerFactoryRef = "tungVincereIoEntityManagerFactory",
+//        transactionManagerRef= "tungVincereIoEntityManagerFactory")
 public class TungVincereIoDataSourceConfiguration {
 
     @Bean(name="tungVincereIoDataSource", destroyMethod = "close")
