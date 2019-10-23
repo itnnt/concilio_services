@@ -24,40 +24,39 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@Configuration
-//@EnableTransactionManagement
-//@EnableJpaRepositories(basePackages = "concilio.data_batch.repository.tung_vincere_io",
-//        entityManagerFactoryRef = "tungVincereIoEntityManagerFactory",
-//        transactionManagerRef= "tungVincereIoEntityManagerFactory")
-public class TungVincereIoDataSourceConfiguration {
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "concilio.data_batch.repository.local.tung.vincere.io.src",
+        entityManagerFactoryRef = "srcTungVincereIoLocalContainerEntityManagerFactory",
+        transactionManagerRef= "srcTungVincereIoTransactionManager")
+public class SrcTungVincereIoDataSourceConfiguration {
 
-    @Bean(name="tungVincereIoDataSource", destroyMethod = "close")
-    DataSource tungVincereIoDataSource(Environment env) {
-        HikariConfig dataSourceConfig = new HikariConfig();
-        dataSourceConfig.setDriverClassName(env.getRequiredProperty("tung.vincere.io.datasource.driverClassName"));
-        dataSourceConfig.setJdbcUrl(env.getRequiredProperty("tung.vincere.io.datasource.url"));
-        dataSourceConfig.setUsername(env.getRequiredProperty("tung.vincere.io.datasource.username"));
-        dataSourceConfig.setPassword(env.getRequiredProperty("tung.vincere.io.datasource.password"));
-
-        return new HikariDataSource(dataSourceConfig);
+    @Bean
+    @ConfigurationProperties("src.tung.vincere.io.datasource")
+    DataSourceProperties tungVincereIoDataSourceProperties() {
+        return new DataSourceProperties();
     }
 
-    @Bean(name = "tungVincereIoEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean tungVincereIoEntityManagerFactory(@Qualifier("tungVincereIoDataSource") DataSource dataSource, Environment env) {
+    @Bean(name="srcTungVincereIoDataSource", destroyMethod = "close")
+    DataSource srcTungVincereIoDataSource() {
+        return tungVincereIoDataSourceProperties()
+                .initializeDataSourceBuilder()
+                .type(HikariDataSource.class)
+                .build();
+    }
+
+    @Bean(name = "srcTungVincereIoLocalContainerEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean srcTungVincereIoLocalContainerEntityManagerFactory(@Qualifier("srcTungVincereIoDataSource") DataSource dataSource, Environment env) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("concilio.data_batch.model.tung_vincere_io");
+        entityManagerFactoryBean.setPackagesToScan("concilio.data_batch.model.concilio");
 
         Properties jpaProperties = new Properties();
 
         //Configures the used database dialect. This allows Hibernate to create SQL
         //that is optimized for the used database.
-        jpaProperties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-
-        System.out.println("------------------------------------->>>>>");
-        System.out.println(env.getRequiredProperty("hibernate.dialect"));
-        System.out.println("------------------------------------->>>>>");
+        jpaProperties.put("hibernate.dialect", env.getRequiredProperty("src.tung.vincere.io.datasource.dialect"));
 
         //Specifies the action that is invoked to the database when the Hibernate
         //SessionFactory is created or closed.
@@ -93,9 +92,9 @@ public class TungVincereIoDataSourceConfiguration {
     }
 
     @Bean
-    public PlatformTransactionManager tungVincereTransactionManager(
-            final @Qualifier("tungVincereIoEntityManagerFactory") LocalContainerEntityManagerFactoryBean tungVincereIoEntityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager(tungVincereIoEntityManagerFactory.getObject());
+    public PlatformTransactionManager srcTungVincereIoTransactionManager(
+            final @Qualifier("srcTungVincereIoLocalContainerEntityManagerFactory") LocalContainerEntityManagerFactoryBean srcTungVincereIoLocalContainerEntityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager(srcTungVincereIoLocalContainerEntityManagerFactory.getObject());
         return transactionManager;
     }
 }

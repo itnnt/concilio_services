@@ -24,14 +24,14 @@ public class UserController {
     JobLauncher jobLauncher;
 
     @Autowired
-    Job job;
+    Job userJob;
 
     @GetMapping
     public BatchStatus jobRun() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         Map<String, JobParameter> map = new HashMap<>();
         map.put("executed_time", new JobParameter(new Date()));
         JobParameters jobParameters = new JobParameters(map);
-        JobExecution jobExe = jobLauncher.run(job, jobParameters);
+        JobExecution jobExe = jobLauncher.run(userJob, jobParameters);
         logger.info("########## Loading data");
         return jobExe.getStatus();
     }

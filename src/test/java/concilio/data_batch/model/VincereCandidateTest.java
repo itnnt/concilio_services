@@ -1,13 +1,14 @@
 package concilio.data_batch.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import concilio.data_batch.model.concilio.Candidate;
 
 import java.util.Date;
 
 public class VincereCandidateTest {
 
     public static void main(String[] args) {
-        VincereCandidate cand = new VincereCandidate();
+        Candidate cand = new Candidate();
         cand.setFirstName("Alex");
         cand.setLastName("Luxubu");
         cand.setEmail("alexlu@gmail.com");

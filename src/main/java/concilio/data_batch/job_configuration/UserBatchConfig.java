@@ -36,7 +36,7 @@ import java.util.Map;
 public class UserBatchConfig  {
     private Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
     @Bean
-    Job job(JobBuilderFactory jobBuilderFactory,
+    Job userJob(JobBuilderFactory jobBuilderFactory,
             StepBuilderFactory stepBuilderFactory,
             ItemReader<User> itemReader,
             ItemProcessor<User, User> itemProcessor,

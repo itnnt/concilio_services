@@ -1,19 +1,16 @@
 package concilio.data_batch.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import concilio.data_batch.model.VincereCandidate;
+import concilio.data_batch.model.concilio.Candidate;
 import okhttp3.*;
-import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -81,8 +78,8 @@ public class VincereCandidateController {
 
     @GetMapping(path = "candidate/create_or_update")
     public String createOrUpdateCandidate() {
-        VincereCandidate cand = new VincereCandidate();
-        cand.setId(579676);
+        Candidate cand = new Candidate();
+        cand.setId(579676L);
         cand.setFirstName("Alex12qwqwqw");
         cand.setLastName("Luxubu");
         cand.setEmail("alexlu12@gmail.com");

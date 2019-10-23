@@ -1,4 +1,4 @@
-package concilio.data_batch.model;
+package concilio.data_batch.model.concilio;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -6,287 +6,381 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Date;
 
+@Entity(name="candidate")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VincereCandidate {
-    private Integer id;
+public class Candidate {
+    @Id
+    private Long id;
 
+    @Column(name = "first_name")
+    // first_name: required
+    @JsonProperty(value="first_name", required = true)
+    private String firstName;
+
+    @Column(name = "first_name_kana")
+    // first_name_kana
+    private String firstNameKana;
+
+    @Transient
     // affiliations
     private String affiliations;
 
+    @Transient
     // String
     // availability_start: Must be in format "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private Date availabilityStart;
 
+    @Transient
     // candidate_source_id (required)
     // internal id of candidate source in Vincere.
     // Please refer to the reference section for candidate source.
     @JsonProperty(value = "candidate_source_id", required = true)
     private Integer candidateSourceId;
 
+    @Transient
     // company_count: the number of previous employers
     private Integer companyCount;
 
+    @Transient
     // company_name
     private String companyName;
 
+    @Transient
     // company_number
     private String companyNumber;
 
+    @Transient
     // contract_interval: Enum: "HOURLY" "DAYLY" "WEEKLY" "MONTHLY" "YEARLY"
     private String contractInterval;
 
+    @Transient
     // contract_rate: pay rate
     private Integer contractRate;
 
+    @Transient
     // country_of_domicile: please refer to reference section of countries
     private String countryOfDomicile;
 
+    @Transient
     // creator_id: internal id of an user in Vincere
     private Integer creatorId;
 
+    @Transient
     // currency_type: Currency. Please refer to reference list for the currency values.
     private String currencyType;
 
+    @Transient
     // current_bonus: amount of money
     private Double currentBonus;
 
+    @Transient
     // current_salary: amount of money
     private Double currentSalary;
 
+    @Transient
     // String
     // date_of_birth: Date of Birth. String must be in format "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private Date dateOfBirth;
 
+    @Transient
     // desired_bonus: amount of money
     private Double desiredBonus;
 
+    @Transient
     // desired_contract_rate: pay rate
     private Integer desiredContractRate;
 
+    @Transient
     // desired_salary: amount of money
     private Double desiredSalary;
 
+    @Transient
     // desired_salary_monthly: amount of money
     private Double desiredSalaryMonthly;
 
+    @Transient
     // driving_license_number: Driving License Number
     private String drivingLicenseNumber;
 
+    @Transient
     // driving_license_type: Driving License Type
     private String drivingLicenseType;
 
+    @Transient
     // education_summary: Education Summary
     private String educationSummary;
 
+    @Column(name="email")
     // email: Primary Email (required)
     @JsonProperty(value="email", required = true)
     private String email;
 
+    @Transient
     // employment_type: Enum: "FULL_TIME" "PART_TIME" "CASUAL" "LABOUR_HIRE"
     private String employmentType;
 
+    @Transient
     // experience
     private String experience;
 
+    @Transient
     // external_id: external Reference id
+    @Column(name = "external_id")
     private String externalId;
 
+    @Transient
     // emergency_name: Emergency Name
     private String emergencyName;
 
+    @Transient
     // emergency_phone: Emergency Phone
     private String emergencyPhone;
 
+    @Transient
     // emergency_relationship: Emergency Relationship
     private String emergencyRelationship;
 
+    @Transient
     // emergency_email: Emergency Email
     private String emergencyEmail;
 
+    @Transient
     // facebook: Facebook URL
     private String facebook;
 
-    // first_name: required
-    @JsonProperty(value="first_name", required = true)
-    private String firstName;
-
-    // first_name_kana
-    private String firstNameKana;
-
+    @Transient
     // gender: Enum: "MALE" "FEMALE" "NO_VALUE"
     // Please refer to reference section for gender
     private String gender;
 
+    @Transient
     // gender_title
     // accepted gender title of a candidate.
     // Expected values are: Mr., Mrs., Ms., Miss., Dr.
     private String genderTitle;
 
+    @Transient
     // home_phone
     private String homePhone;
 
+    @Transient
     // ielts_score: IELTS Score
     private String ieltsScore;
 
+    @Transient
     // keyword: Keywords. Multiple keywords should be separated by commas
     private String keyword;
 
+    @Transient
     // last_name: required
     @JsonProperty(value="last_name", required = true)
     private String lastName;
 
+    @Transient
     // last_name_kana
     private String lastNameKana;
 
+    @Transient
     // linked_contact_id: contact internal id
     private Integer linkedContactId;
 
+    @Transient
     // linked_in: LinkedIn Url
     private String linkedIn;
 
+    @Transient
     // marital_status: Marital Status. Please refer to reference section for Marital Status
     private String maritalStatus;
 
+    @Transient
     // met_status: please refer to reference section of meetingstatuses.
     private String metStatus;
 
+    @Transient
     // middle_name
     private String middleName;
 
+    @Transient
     // middle_name_kana
     private String middleNameKana;
 
+    @Transient
     private String mobile;
 
+    @Transient
     // nationality: Please refer to reference section for nationality
     private String nationality;
 
+    @Transient
     // nearest_train_station
     private String nearestTrainStation;
 
+    @Transient
     private String note;
 
+    @Transient
     // note_by: internal id of an user in Vincere
     private Integer noteBy;
 
+    @Transient
     // note_on: Date Time for last modification of the note.
     // Must be in this format "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private Date noteOn;
 
+    @Transient
     // notice_days: notice period (in days)
     private Integer noticeDays;
 
+    @Transient
     // objective
     private String objective;
 
+    @Transient
     // other_benefits
     private String otherBenefits;
 
+    @Transient
     // passport_no: Passport Number
     private String passportNo;
 
+    @Transient
     // payment_type: Enum: "PAYG" "PAYE" "LTD_CO"
     // candidate payment type, including PAYG, PAYE or LTD_CO (Ltd Co. or corporation)
     private String paymentType;
 
+    @Transient
     // payslip_email: Candidate payslip email. It's unique.
     private String payslipEmail;
 
+    @Transient
     // personal_statements
     private String personalStatements;
 
+    @Transient
     // phone: Primary Phone
     private String phone;
 
+    @Transient
     // place_of_birth
     private String placeOfBirth;
 
+    @Transient
     // preferred_language: please refer to reference section of languages
     private String preferredLanguage;
 
+    @Transient
     // present_salary_rate
     private Double presentSalaryRate;
 
+    @Transient
     // publications
     private String publications;
 
+    @Transient
     // reference
     private String reference;
 
+    @Transient
     // registration_date: required
     // Registration Date. Must be in format "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
     @JsonProperty(value="registration_date", required = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date registrationDate;
 
+    @Transient
     // relocate
     private Boolean relocate;
 
+    @Transient
     // salary_months_per_year: number of months per year
     private Double salaryMonthsPerYear;
 
+    @Transient
     // salary_type: Enum: "ANNUAL" "MONTHLY"
     // candidate salary type
     private String salaryType;
 
+    @Transient
     // skills: Skill Summary, skills are deliminated by comma, i.e. ","
     private String skills;
 
+    @Transient
     private String skype;
 
+    @Transient
     private String statements;
 
+    @Transient
     private String summary;
 
+    @Transient
     // toeic_score
     private String toeicScore;
 
+    @Transient
     // total_gross: total gross compensation per year
     private Double totalGross;
 
+    @Transient
     // twitter: Twitter Url
     private String twitter;
 
+    @Transient
     private String variant;
 
+    @Transient
     // visa_note
     private String visaNote;
 
+    @Transient
     // visa_number
     private String visaNumber;
 
+    @Transient
     // visa_renewal_date: string
     // Must be in format "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     private Date visaRenewalDate;
 
+    @Transient
     // visa_status
     private String visaStatus;
 
+    @Transient
     // visa_type
     private String visaType;
 
+    @Transient
     // website
     private String website;
 
+    @Transient
     // work_email
     private String workEmail;
 
+    @Transient
     // work_phone
     private String workPhone;
 
+    @Transient
     // xing: Xing Url
     private String xing;
 
+    @Transient
     // linked_in_resume_content: The resume content retrieved from LinkedIn
     private String linkedInResumeContent;
 
+    @Transient
     //string
     //nickname (or preferred name)
     private String nickname;
 
-    public VincereCandidate() {
+    public Candidate() {
     }
 
     public String getAffiliations() {
@@ -985,13 +1079,15 @@ public class VincereCandidate {
         this.nickname = nickname;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
+
+
 
     public String toJson() throws JsonProcessingException {
         // Creating Object of ObjectMapper define in Jakson Api
