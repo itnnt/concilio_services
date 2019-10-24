@@ -10,6 +10,7 @@ import org.springframework.batch.core.configuration.annotation.DefaultBatchConfi
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude={org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class})
 @EnableBatchProcessing
 public class UserBatchConfig  {
     private Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
@@ -48,6 +49,7 @@ public class UserBatchConfig  {
                 .writer(itemWriter)
                 .build();
         return jobBuilderFactory.get("User-job")
+                .incrementer(new RunIdIncrementer())
                 .start(step)
                 .build();
     }

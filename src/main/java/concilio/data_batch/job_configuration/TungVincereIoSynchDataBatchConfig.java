@@ -55,7 +55,7 @@ public class TungVincereIoSynchDataBatchConfig {
     @Bean
     JdbcCursorItemReader reader(@Qualifier("srcTungVincereIoDataSource") DataSource dataSource) {
         JdbcCursorItemReader<Candidate> jdbcCursorItemReader = new JdbcCursorItemReader<>();
-        jdbcCursorItemReader.setSql("select id, external_id, email, first_name, last_name from candidate");
+        jdbcCursorItemReader.setSql("select * from candidate");
         jdbcCursorItemReader.setDataSource(dataSource);
 
         jdbcCursorItemReader.setRowMapper(new RowMapper<Candidate>() {
