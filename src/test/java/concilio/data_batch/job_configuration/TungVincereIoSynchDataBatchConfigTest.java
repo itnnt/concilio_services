@@ -47,8 +47,19 @@ public class TungVincereIoSynchDataBatchConfigTest {
 
     @Test
     public void testJobSchynCandidate() throws Exception {
+        // remove all rows from the sink database's candidate table
+        candidateRepositorySin.deleteAllInBatch();
+
+        // make sure the candidate table was empty
+        assertThat(candidateRepositorySin.count()).isEqualTo(0);
+
+        // run job to synch candidate table
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+
+        // make sure the job has been completed
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
+
+        // make sure all rows had been synchronized
         assertThat(candidateRepositorySrc.count()).isEqualTo(candidateRepositorySin.count());
     }
 

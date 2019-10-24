@@ -10,7 +10,6 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,29 +30,34 @@ import java.util.List;
 public class TungVincereIoSynchDataBatchConfig {
     private Logger logger = LoggerFactory.getLogger(TungVincereIoSynchDataBatchConfig.class);
 
+    @Autowired
+    private JobBuilderFactory jobBuilderFactory;
+
+    @Autowired
+    private StepBuilderFactory stepBuilderFactory;
+
     @Bean
-    Job jobSchynCandidate(
-            JobBuilderFactory jobBuilderFactory,
-            StepBuilderFactory stepBuilderFactory,
-            ItemReader<Candidate> itemReader,
-            ItemProcessor<Candidate, Candidate> itemProcessor,
-            ItemWriter<Candidate> itemWriter
-    ) {
+    Step step1() {
         Step step = stepBuilderFactory
                 .get("TungVincereIoSynchDataBatchConfig: Candiate synching step")
                 .<Candidate, Candidate>chunk(100)
-                .reader(itemReader)
-                .processor(itemProcessor)
-                .writer(itemWriter)
+                .reader(candidateReader(null))
+                .processor(candidateProcessor())
+                .writer(candidateWriter())
                 .build();
+        return step;
+    }
+
+    @Bean
+    Job jobSchynCandidate() {
         return jobBuilderFactory
                 .get("TungVincereIoSynchDataBatchConfig: Candiate synching job")
-                .start(step)
+                .start(step1())
                 .build();
     }
 
     @Bean
-    JdbcCursorItemReader reader(@Qualifier("srcTungVincereIoDataSource") DataSource dataSource) {
+    JdbcCursorItemReader candidateReader(@Qualifier("srcTungVincereIoDataSource") DataSource dataSource) {
         JdbcCursorItemReader<Candidate> jdbcCursorItemReader = new JdbcCursorItemReader<>();
         jdbcCursorItemReader.setSql("select id, external_id, email, first_name, last_name from candidate");
         jdbcCursorItemReader.setDataSource(dataSource);
@@ -74,7 +78,7 @@ public class TungVincereIoSynchDataBatchConfig {
     }
 
     @Bean
-    ItemProcessor<Candidate, Candidate> processor() {
+    ItemProcessor<Candidate, Candidate> candidateProcessor() {
         return new ItemProcessor<Candidate, Candidate>() {
             @Override
             public Candidate process(Candidate o) throws Exception {
@@ -87,7 +91,7 @@ public class TungVincereIoSynchDataBatchConfig {
     CandidateRepositorySin candidateRepositorySin;
 
     @Bean
-    ItemWriter<Candidate> writer() {
+    ItemWriter<Candidate> candidateWriter() {
         return new ItemWriter<Candidate>() {
             @Override
             public void write(List<? extends Candidate> list) throws Exception {
