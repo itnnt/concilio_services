@@ -63,10 +63,10 @@ public class TungVincereIoSynchDataBatchConfig {
             public Candidate mapRow(ResultSet resultSet, int i) throws SQLException {
                 Candidate cand = new Candidate();
                 cand.setId(resultSet.getLong("id"));
-                cand.setExternalId(resultSet.getString("external_id"));
+//                cand.setExternalId(resultSet.getString("external_id"));
                 cand.setEmail(resultSet.getString("email"));
                 cand.setFirstName(resultSet.getString("first_name"));
-                cand.setLastName(resultSet.getString("last_name"));
+//                cand.setLastName(resultSet.getString("last_name"));
                 return cand;
             }
         });
