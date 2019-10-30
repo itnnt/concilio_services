@@ -45,6 +45,8 @@ public class TungVincereIoSynchDataBatchConfigTest {
 
     @Test
     public void testJobSchynCandidate() throws Exception {
+        candidateRepositorySin.deleteAll();
+        assertThat(candidateRepositorySin.count()).isEqualTo(0l);
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
         assertThat(candidateRepositorySrc.count()).isEqualTo(candidateRepositorySin.count());

@@ -1,7 +1,7 @@
 package concilio.repository.local.tung.vincere.is.src;
 
 import concilio.model.concilio.Candidate;
-import concilio.repository.local.tung.vincere.io.src.CandidateRepositorySrc;
+import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,11 +11,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CandidateRepositorySrcTest {
+public class CandidateRepositorySinTest {
 
 
     @Autowired
-    CandidateRepositorySrc candidateRepositorySrc;
+    CandidateRepositorySin candidateRepositorySin;
 
     public Candidate newCandidate() {
         // given
@@ -31,10 +31,10 @@ public class CandidateRepositorySrcTest {
     public void saveCandidateThenGet() {
         // given
         Candidate candidate = newCandidate();
-        candidateRepositorySrc.save(candidate);
+        candidateRepositorySin.save(candidate);
 
         // when
-        Candidate found = candidateRepositorySrc.getOne(1L);
+        Candidate found = candidateRepositorySin.getOne(1L);
 
         // then
         Assertions.assertThat(found).isNotNull();
@@ -44,22 +44,22 @@ public class CandidateRepositorySrcTest {
     public void saveCandidateThenGetThenRemove() {
         // given
         Candidate candidate = newCandidate();
-        candidateRepositorySrc.save(candidate);
+        candidateRepositorySin.save(candidate);
 
         // when
-        Candidate found = candidateRepositorySrc.getOne(1L);
+        Candidate found = candidateRepositorySin.getOne(1L);
 
         // then
         Assertions.assertThat(found).isNotNull();
 
-        long count1 = candidateRepositorySrc.count();
+        long count1 = candidateRepositorySin.count();
         // remove
-        candidateRepositorySrc.delete(found);
+        candidateRepositorySin.delete(found);
 
-        long count2 = candidateRepositorySrc.count();
+        long count2 = candidateRepositorySin.count();
 
         Assertions.assertThat(count2).isEqualTo(count1 - 1);
-        Assertions.assertThat(null == candidateRepositorySrc.getOne(1L));
+        Assertions.assertThat(null == candidateRepositorySin.getOne(1L));
 
     }
 }

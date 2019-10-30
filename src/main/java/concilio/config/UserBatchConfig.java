@@ -29,7 +29,11 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@EnableAutoConfiguration(exclude={org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class, org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class})
+@EnableAutoConfiguration(
+        exclude={
+                org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration.class,
+                org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration.class
+        })
 @EnableBatchProcessing
 public class UserBatchConfig  {
     private Logger logger = LoggerFactory.getLogger(UserBatchConfig.class);
