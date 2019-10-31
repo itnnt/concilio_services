@@ -14,6 +14,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.EnumSet;
@@ -49,11 +50,11 @@ public class RoutingTestUtil {
         Metadata mtd = metadata.buildMetadata();
 
         java.io.File tempFile = null;
-        tempFile = java.io.File.createTempFile("schema", ".sql");
+        tempFile = new File("schema.sql");
         new SchemaExport()
                 .setOutputFile(tempFile.getAbsolutePath())
                 .setFormat(false)
-                .createOnly(EnumSet.of(TargetType.DATABASE), mtd);
+                .createOnly(EnumSet.of(TargetType.DATABASE, TargetType.SCRIPT), mtd);
 
 
 

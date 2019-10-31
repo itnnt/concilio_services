@@ -59,9 +59,7 @@ public class RoutingApplicationTests {
 
         for (DatabaseEnvironment databaseEnvironment : DatabaseEnvironment.values()) {
             DatabaseContextHolder.set(databaseEnvironment);
-            assertEquals(1L,
-//                customerRepository.findOneByName("Tony Tester").getId().longValue());
-                    customerRepository.findById(1L).get().getId().longValue());
+            assertEquals(1L, customerRepository.findOneByName(("Tony Tester " + databaseEnvironment)).getId().longValue());
 
             Customer customer = customerRepository.findById(1L).get();
             System.out.println("--------------------------------------------------------");
@@ -81,25 +79,6 @@ public class RoutingApplicationTests {
         }*/
 
     }
-
-//    @Autowired
-//    JobLauncherTestUtils customerBatchTest;
-
-//    @Before
-//    public void setUp() {
-//    }
-//
-//    @After
-//    public void tearDown() {
-//    }
-
-//    @Test
-//    public void customerBatchJob() throws Exception {
-//        DatabaseContextHolder.set(DatabaseEnvironment.DEVELOPMENT);
-//        JobExecution jobExecution = customerBatchTest.launchJob();
-//        assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
-//
-//    }
 
     @Configuration
     @Import({RoutingTestUtil.class, CustomerBatchConfig.class, DataSourceConfiguration.class, ConcilioDataSourceConfiguration.class})
