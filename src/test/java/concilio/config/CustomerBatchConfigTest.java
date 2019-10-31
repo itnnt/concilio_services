@@ -5,6 +5,7 @@ import concilio.config.datasource.ConcilioDataSourceConfiguration;
 import concilio.config.datasource.DataSourceConfiguration;
 import concilio.config.routing.DatabaseContextHolder;
 import concilio.config.routing.DatabaseEnvironment;
+import concilio.config.routing.RoutingTestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +29,16 @@ public class CustomerBatchConfigTest {
     @Autowired
     JobLauncherTestUtils customerBatchTest;
 
+    @Autowired
+    RoutingTestUtil routingTestUtil;
+
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        // Create databases for each environment
+        for (DatabaseEnvironment databaseEnvironment : DatabaseEnvironment
+                .values()) {
+            routingTestUtil.createDatabase(databaseEnvironment);
+        }
     }
 
     @After
@@ -38,14 +47,14 @@ public class CustomerBatchConfigTest {
 
     @Test
     public void customerBatchJob() throws Exception {
-        DatabaseContextHolder.set(DatabaseEnvironment.PRODUCTION);
+        DatabaseContextHolder.set(DatabaseEnvironment.DEVELOPMENT);
         JobExecution jobExecution = customerBatchTest.launchJob();
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
 
     }
 
     @Configuration
-    @Import({CustomerBatchConfig.class, DataSourceConfiguration.class, ConcilioDataSourceConfiguration.class})
+    @Import({RoutingTestUtil.class, CustomerBatchConfig.class, DataSourceConfiguration.class, ConcilioDataSourceConfiguration.class})
     static class BatchTestConfig {
         @Autowired
         Job customerBatchJob;

@@ -1,11 +1,9 @@
 package concilio.repository.customer;
 
 import concilio.model.customer.Customer;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Cacheable("customers")
     Customer findOneByName(String name);
 }
