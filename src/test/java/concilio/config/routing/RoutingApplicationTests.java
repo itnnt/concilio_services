@@ -35,6 +35,7 @@ public class RoutingApplicationTests {
         // Create a customer in each environment
         for (DatabaseEnvironment databaseEnvironment : DatabaseEnvironment
             .values()) {
+            System.out.println("-------------------" + databaseEnvironment + "------------------");
             DatabaseContextHolder.set(databaseEnvironment);
             Customer devCustomer = new Customer();
             devCustomer.setId(1L);
