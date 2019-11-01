@@ -1,4 +1,4 @@
-package concilio.model;
+package concilio.entity;
 
 /**
  * The Class StockPriceDetails.

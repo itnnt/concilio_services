@@ -1,7 +1,7 @@
 package concilio.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import concilio.model.concilio.Candidate;
+import concilio.entity.concilio.Candidate;
 import okhttp3.*;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;

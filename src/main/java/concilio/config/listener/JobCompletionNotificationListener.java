@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import concilio.model.FxMarketPricesStore;
-import concilio.model.StockPriceDetails;
+import concilio.entity.FxMarketPricesStore;
+import concilio.entity.StockPriceDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;

@@ -3,7 +3,7 @@ package concilio.config;
 import concilio.config.processor.LoggingStudentProcessor;
 import concilio.config.reader.RESTStudentReader;
 import concilio.config.writer.LoggingStudentWriter;
-import concilio.model.Student;
+import concilio.entity.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;

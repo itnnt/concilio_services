@@ -1,4 +1,4 @@
-package concilio.model;
+package concilio.entity;
 
 import java.util.Collection;
 import java.util.HashMap;

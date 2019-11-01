@@ -1,8 +1,7 @@
-package concilio.model.tung_vincere_io;
+package concilio.entity.tung_vincere_io;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

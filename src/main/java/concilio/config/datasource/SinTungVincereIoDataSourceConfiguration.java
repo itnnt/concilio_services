@@ -1,6 +1,8 @@
 package concilio.config.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
+import concilio.entity.concilio.Candidate;
+import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +22,8 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "concilio.repository.local.tung.vincere.io.sin",
+//        basePackages = "concilio.repository.local.tung.vincere.io.sin",
+        basePackageClasses = CandidateRepositorySin.class,
         entityManagerFactoryRef = "sinTungVincereIoLocalContainerEntityManagerFactory",
         transactionManagerRef = "sinTungVincereIoPlatformTransactionManager"
 )
@@ -47,7 +50,7 @@ public class SinTungVincereIoDataSourceConfiguration {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("concilio.model.concilio");
+        entityManagerFactoryBean.setPackagesToScan(Candidate.class.getPackage().getName());
 
         Properties jpaProperties = new Properties();
 

@@ -1,6 +1,6 @@
 package concilio.controller;
 
-import concilio.model.card.User;
+import concilio.entity.card.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.*;

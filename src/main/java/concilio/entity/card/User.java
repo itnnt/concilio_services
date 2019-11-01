@@ -1,4 +1,4 @@
-package concilio.model.card;
+package concilio.entity.card;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

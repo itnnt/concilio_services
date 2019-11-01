@@ -1,9 +1,8 @@
-package concilio.model;
+package concilio.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
 
 /**
  * Contains the information of a single student who has purchased

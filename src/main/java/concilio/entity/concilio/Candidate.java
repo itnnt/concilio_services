@@ -1,4 +1,4 @@
-package concilio.model.concilio;
+package concilio.entity.concilio;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -2,6 +2,8 @@ package concilio.config.datasource;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import concilio.entity.member.Member;
+import concilio.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +20,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "concilio.repository.member",
+@EnableJpaRepositories(
+//        basePackages = "concilio.repository.member",
+        basePackageClasses = MemberRepository.class,
         entityManagerFactoryRef = "memberEntityManagerFactory",
         transactionManagerRef= "memberTransactionManager"
 )
@@ -41,7 +45,7 @@ public class MemberDataSourceConfiguration {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource);
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("concilio.model.member");
+        localContainerEntityManagerFactoryBean.setPackagesToScan(Member.class.getPackage().getName());
 
         Properties prop = new Properties();
         prop.put("hibernate.dialect", env.getRequiredProperty("app.datasource.member.dialect"));

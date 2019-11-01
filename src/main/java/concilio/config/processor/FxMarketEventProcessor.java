@@ -1,7 +1,7 @@
 package concilio.config.processor;
 
-import concilio.model.FxMarketEvent;
-import concilio.model.Trade;
+import concilio.entity.FxMarketEvent;
+import concilio.entity.Trade;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

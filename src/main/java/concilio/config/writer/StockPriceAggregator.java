@@ -1,8 +1,8 @@
 package concilio.config.writer;
 
-import concilio.model.FxMarketPricesStore;
-import concilio.model.StockPriceDetails;
-import concilio.model.Trade;
+import concilio.entity.FxMarketPricesStore;
+import concilio.entity.StockPriceDetails;
+import concilio.entity.Trade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;

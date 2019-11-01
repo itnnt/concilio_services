@@ -1,21 +1,20 @@
-package concilio.model.card;
+package concilio.entity.concilio;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Card {
+@Entity(name="conciliomember")
+public class ConcilioMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private int expirationMonth;
-    private int expirationYear;
+    private String memberId;
 
-    public Card() {
+    public ConcilioMember() {
     }
 
     public Long getId() {
@@ -34,19 +33,11 @@ public class Card {
         this.name = name;
     }
 
-    public int getExpirationMonth() {
-        return expirationMonth;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setExpirationMonth(int expirationMonth) {
-        this.expirationMonth = expirationMonth;
-    }
-
-    public int getExpirationYear() {
-        return expirationYear;
-    }
-
-    public void setExpirationYear(int expirationYear) {
-        this.expirationYear = expirationYear;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

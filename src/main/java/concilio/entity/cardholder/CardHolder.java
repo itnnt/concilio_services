@@ -1,4 +1,4 @@
-package concilio.model.cardholder;
+package concilio.entity.cardholder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

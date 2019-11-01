@@ -1,6 +1,6 @@
 package concilio.config.reader;
 
-import concilio.model.FxMarketEvent;
+import concilio.entity.FxMarketEvent;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;

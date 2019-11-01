@@ -1,12 +1,12 @@
-package concilio.model.concilio;
+package concilio.entity.member;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name="conciliomember")
-public class ConcilioMember {
+@Entity(name="person")
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,7 +14,7 @@ public class ConcilioMember {
     private String name;
     private String memberId;
 
-    public ConcilioMember() {
+    public Member() {
     }
 
     public Long getId() {

@@ -1,6 +1,6 @@
 package concilio.config;
 
-import concilio.model.card.User;
+import concilio.entity.card.User;
 import concilio.repository.card.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

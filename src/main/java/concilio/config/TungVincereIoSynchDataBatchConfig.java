@@ -1,6 +1,6 @@
 package concilio.config;
 
-import concilio.model.concilio.Candidate;
+import concilio.entity.concilio.Candidate;
 import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

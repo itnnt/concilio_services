@@ -2,6 +2,8 @@ package concilio.config.datasource;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import concilio.entity.cardholder.CardHolder;
+import concilio.repository.cardholder.CardHolderRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +20,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "concilio.repository.cardholder",
+@EnableJpaRepositories(
+//        basePackages = "concilio.repository.cardholder",
+        basePackageClasses = CardHolderRepository.class,
         entityManagerFactoryRef = "cardHolderEntityManagerFactory",
         transactionManagerRef= "cardHolderTransactionManager")
 public class CardHolderDataSourceConfiguration {
@@ -41,7 +45,7 @@ public class CardHolderDataSourceConfiguration {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource);
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        localContainerEntityManagerFactoryBean.setPackagesToScan("concilio.model.cardholder");
+        localContainerEntityManagerFactoryBean.setPackagesToScan(CardHolder.class.getPackage().getName());
 
         Properties prop = new Properties();
         prop.put("hibernate.dialect", env.getRequiredProperty("app.datasource.cardholder.dialect"));
