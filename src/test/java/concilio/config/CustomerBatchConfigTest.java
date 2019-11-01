@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobInstance;
+import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,6 +35,9 @@ public class CustomerBatchConfigTest {
 
     @Autowired
     RoutingTestUtil routingTestUtil;
+
+    @Autowired
+    JobExplorer jobExplorer;
 
     @Before
     public void setUp() throws Exception {
@@ -47,10 +54,20 @@ public class CustomerBatchConfigTest {
 
     @Test
     public void customerBatchJob() throws Exception {
+        // batch job execution before
+        List<JobInstance> jobInstancesBefore = jobExplorer.getJobInstances("customer batch job", 0, Integer.MAX_VALUE);
+
+        // test job run
         DatabaseContextHolder.set(DatabaseEnvironment.DEVELOPMENT);
         JobExecution jobExecution = customerBatchTest.launchJob();
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
+        assertThat(jobExecution.getStatus().getBatchStatus().toString()).isEqualTo("COMPLETED");
 
+        // batch job execution after
+        List<JobInstance> jobInstances = jobExplorer.getJobInstances("customer batch job", 0, Integer.MAX_VALUE);
+
+        // check logs of job executions
+        assertThat(jobInstances.size()).isEqualTo(jobInstancesBefore.size() + 1);
     }
 
     @Configuration

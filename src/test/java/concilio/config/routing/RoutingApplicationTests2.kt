@@ -3,7 +3,7 @@ package concilio.config.routing
 import concilio.config.CustomerBatchConfig
 import concilio.config.datasource.ConcilioDataSourceConfiguration
 import concilio.config.datasource.DataSourceConfiguration
-import concilio.model.customer.Customer
+import concilio.entity.customer.Customer
 import concilio.repository.customer.CustomerRepository
 import org.junit.Assert.*
 import org.junit.Test

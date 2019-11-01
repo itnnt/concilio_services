@@ -1,7 +1,7 @@
-package concilio.model;
+package concilio.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import concilio.model.concilio.Candidate;
+import concilio.entity.concilio.Candidate;
 
 import java.util.Date;
 

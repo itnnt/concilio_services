@@ -33,7 +33,7 @@ public class UserBatchConfigTest {
     JobLauncherTestUtils jobLauncherTestUtils;
 
     @Autowired
-        JobExplorer jobExplorer;
+    JobExplorer jobExplorer;
 
     @Autowired
     UserRepository userRepository;

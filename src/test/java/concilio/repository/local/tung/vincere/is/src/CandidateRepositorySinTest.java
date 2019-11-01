@@ -1,6 +1,6 @@
 package concilio.repository.local.tung.vincere.is.src;
 
-import concilio.model.concilio.Candidate;
+import concilio.entity.concilio.Candidate;
 import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

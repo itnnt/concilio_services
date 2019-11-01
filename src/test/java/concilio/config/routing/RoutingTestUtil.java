@@ -1,10 +1,9 @@
 package concilio.config.routing;
 
-import concilio.model.customer.Customer;
+import concilio.entity.customer.Customer;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
@@ -18,9 +17,6 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.EnumSet;
-
-import static org.hibernate.tool.schema.TargetType.DATABASE;
-import static org.hibernate.tool.schema.TargetType.STDOUT;
 
 @Component("routingTestUtil")
 public class RoutingTestUtil {
