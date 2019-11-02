@@ -7,6 +7,7 @@ import concilio.repository.card.CardRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -25,6 +26,7 @@ import java.util.Properties;
         basePackageClasses = CardRepository.class,
         entityManagerFactoryRef = "cardEntityManagerFactory",
         transactionManagerRef= "cardTransactionManager")
+@PropertySource("classpath:application-datasources.properties")
 public class CardDataSourceConfiguration {
 
     @Bean(name = "cardDataSource", destroyMethod = "close")

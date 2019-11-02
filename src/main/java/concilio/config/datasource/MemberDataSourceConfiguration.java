@@ -7,6 +7,7 @@ import concilio.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -26,6 +27,7 @@ import java.util.Properties;
         entityManagerFactoryRef = "memberEntityManagerFactory",
         transactionManagerRef= "memberTransactionManager"
 )
+@PropertySource("classpath:application-datasources.properties")
 public class MemberDataSourceConfiguration {
 
     @Bean(name = "memberDataSource", destroyMethod = "close")

@@ -83,6 +83,10 @@ public class JpaBatchInsertsIntegrationTest {
         List<School> allSchools = schoolQuery.getResultList();
 
         for (School school : allSchools) {
+            List<Student> students = school.getStudents();
+            if (students != null) {
+                students.forEach((Student st) -> st.setName("update student name: " + st.getName()));
+            }
             school.setName("Updated_" + school.getName());
         }
     }
