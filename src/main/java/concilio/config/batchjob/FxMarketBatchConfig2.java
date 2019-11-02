@@ -1,4 +1,4 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 import concilio.config.listener.JobCompletionNotificationListener;
 import concilio.config.processor.FxMarketEventProcessor;

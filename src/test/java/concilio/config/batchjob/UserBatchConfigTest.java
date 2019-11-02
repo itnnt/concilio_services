@@ -1,14 +1,13 @@
-package concilio.config;
+package concilio.config.batchjob;
 
+import concilio.config.datasource.CardDataSourceConfiguration;
 import concilio.config.datasource.ConcilioDataSourceConfiguration;
-import concilio.config.datasource.SinTungVincereIoDataSourceConfiguration;
-import concilio.config.datasource.SrcTungVincereIoDataSourceConfiguration;
-import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
-import concilio.repository.local.tung.vincere.io.src.CandidateRepositorySrc;
+import concilio.repository.card.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobInstance;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.launch.NoSuchJobException;
 import org.springframework.batch.test.JobLauncherTestUtils;
@@ -19,17 +18,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
-        classes = {
-                SinTungVincereIoDataSourceConfiguration.class,
-                SrcTungVincereIoDataSourceConfiguration.class,
+        classes = {CardDataSourceConfiguration.class,
                 ConcilioDataSourceConfiguration.class,
-                TungVincereIoSynchDataBatchConfigTest.BatchTestConfig.class
-        })
-public class TungVincereIoSynchDataBatchConfigTest {
+                UserBatchConfigTest.BatchTestConfig.class})
+public class UserBatchConfigTest {
 
     @Autowired
     JobLauncherTestUtils jobLauncherTestUtils;
@@ -38,31 +36,43 @@ public class TungVincereIoSynchDataBatchConfigTest {
     JobExplorer jobExplorer;
 
     @Autowired
-    CandidateRepositorySrc candidateRepositorySrc;
-
-    @Autowired
-    CandidateRepositorySin candidateRepositorySin;
+    UserRepository userRepository;
 
     @Test
-    public void testJobSchynCandidate() throws Exception {
-        candidateRepositorySin.deleteAll();
-        assertThat(candidateRepositorySin.count()).isEqualTo(0l);
+    public void testRemoveAllUser() throws Exception {
+        userRepository.deleteAll();
+        assertThat(userRepository.findAll().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void testUserJob() throws Exception {
+        List<JobInstance> jobInstanceBefore = jobExplorer.getJobInstances("User-job", 0, Integer.MAX_VALUE);
+
+        userRepository.deleteAll();
+        assertThat(userRepository.findAll().size()).isEqualTo(0);
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
-        assertThat(candidateRepositorySrc.count()).isEqualTo(candidateRepositorySin.count());
+        assertThat(userRepository.findAll().size()).isEqualTo(6);
+
+        // make sure spring batch logged execution info to meta data schema
+        List<JobInstance> jobInstanceAfter = jobExplorer.getJobInstances("User-job", 0, Integer.MAX_VALUE);
+        assertThat(jobInstanceAfter.size()).isEqualTo(jobInstanceBefore.size() + 1);
     }
 
     @Configuration
-    @Import({TungVincereIoSynchDataBatchConfig.class})
+    @Import({UserBatchConfig.class, CardDataSourceConfiguration.class})
     static class BatchTestConfig {
+
         @Autowired
-        private Job jobSchynCandidate;
+        private Job userJob;
 
         @Bean
         JobLauncherTestUtils jobLauncherTestUtils() throws NoSuchJobException {
             JobLauncherTestUtils jobLauncherTestUtils = new JobLauncherTestUtils();
-            jobLauncherTestUtils.setJob(jobSchynCandidate);
+            jobLauncherTestUtils.setJob(userJob);
             return jobLauncherTestUtils;
         }
     }
 }
+
+

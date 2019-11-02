@@ -1,4 +1,4 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 import concilio.config.routing.DatabaseContextHolder;
 import concilio.config.routing.DatabaseEnvironment;

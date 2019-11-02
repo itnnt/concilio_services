@@ -1,4 +1,4 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 import concilio.entity.concilio.Candidate;
 import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;

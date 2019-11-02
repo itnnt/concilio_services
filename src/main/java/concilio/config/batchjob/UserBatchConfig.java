@@ -1,4 +1,4 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 import concilio.entity.card.User;
 import concilio.repository.card.UserRepository;

@@ -1,4 +1,4 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 import concilio.config.processor.LoggingStudentProcessor;
 import concilio.config.reader.RESTStudentReader;

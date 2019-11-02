@@ -1,6 +1,6 @@
 package concilio.config.routing
 
-import concilio.config.CustomerBatchConfig
+import concilio.config.batchjob.CustomerBatchConfig
 import concilio.config.datasource.ConcilioDataSourceConfiguration
 import concilio.config.datasource.DataSourceConfiguration
 import concilio.entity.customer.Customer

@@ -1,4 +1,4 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 import concilio.entity.FxMarketEvent;
 import concilio.entity.Trade;

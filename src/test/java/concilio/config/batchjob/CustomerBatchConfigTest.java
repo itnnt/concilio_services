@@ -1,6 +1,7 @@
-package concilio.config;
+package concilio.config.batchjob;
 
 
+import concilio.config.batchjob.CustomerBatchConfig;
 import concilio.config.datasource.ConcilioDataSourceConfiguration;
 import concilio.config.datasource.DataSourceConfiguration;
 import concilio.config.routing.DatabaseContextHolder;
