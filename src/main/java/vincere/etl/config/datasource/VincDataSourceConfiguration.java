@@ -83,12 +83,16 @@ public class VincDataSourceConfiguration {
         entityManagerFactoryBean.setPackagesToScan(AccountantEmail.class.getPackage().getName());
 
         Properties prop = new Properties();
-        prop.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-        prop.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto.override"));
+        prop.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect.override"));
+        prop.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
         Assert.isTrue(env.getRequiredProperty("hibernate.hbm2ddl.auto.override").equals("validate"), "expected: validate - " + "actual: " + env.getRequiredProperty("hibernate.hbm2ddl.auto.override"));
         prop.put("hibernate.ejb.naming_strategy", env.getRequiredProperty("hibernate.ejb.naming_strategy"));
         prop.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         prop.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+        // avoid exception: Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+//        prop.put("hibernate.jdbc.lob.non_contextual_creation", "true");
+//        prop.put("hibernate.temp.use_jdbc_metadata_defaults", "false");
+
         entityManagerFactoryBean.setJpaProperties(prop);
 
         return entityManagerFactoryBean;
