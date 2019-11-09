@@ -1,4 +1,4 @@
-package vincere.etl.config.routing
+package vincere.etl.config.datasource
 
 import org.assertj.core.api.Assertions
 import org.junit.Test
@@ -9,18 +9,17 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.core.env.Environment
 import org.springframework.test.context.junit4.SpringRunner
-import vincere.etl.config.datasource.VincDataSourceConfiguration
 import javax.persistence.EntityManager
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class VincereRoutingApplicationTests {
+class LocalRoutingApplicationTests {
 
     @Autowired
     internal lateinit var env: Environment
 
     @Autowired
-    internal lateinit var vincereRoutingTestUtil: VincereRoutingTestUtil
+    internal lateinit var vincereRoutingTestUtil: LocalRoutingTestUtil
 
     @Autowired
     internal  lateinit var entityManager: EntityManager
@@ -29,7 +28,7 @@ class VincereRoutingApplicationTests {
     @Throws(Exception::class)
     fun contextSwitch_createDataSchema_saveRecodeToTables() {
         // Create databases for each environment
-        for (databaseEnvironment in DatabaseEnvironment.values()) {
+        for (databaseEnvironment in LocalDatabaseEnvironment.values()) {
             val url = env.getRequiredProperty(databaseEnvironment.url)
             val username = env.getRequiredProperty(databaseEnvironment.username)
             val password = env.getRequiredProperty(databaseEnvironment.password)
@@ -43,7 +42,7 @@ class VincereRoutingApplicationTests {
     }
 
     @Configuration
-    @Import(VincereRoutingTestUtil::class, VincDataSourceConfiguration::class)
+    @Import(LocalRoutingTestUtil::class, LocalDataSourceConfiguration::class)
     internal open class BatchTestConfig {
 //        @Autowired
 //        var customerBatchJob: Job? = null

@@ -1,19 +1,19 @@
-package vincere.etl.config.routing;
+package vincere.etl.config.datasource;
 
 /**
  * Thread shared context to point to the datasource which should be used. This
  * enables context switches between different environments.
  */
-public class DatabaseContextHolder {
+public class LocalDatabaseContextHolder {
 
-    private static final ThreadLocal<DatabaseEnvironment> CONTEXT =
+    private static final ThreadLocal<LocalDatabaseEnvironment> CONTEXT =
         new ThreadLocal<>();
 
-    public static void set(DatabaseEnvironment databaseEnvironment) {
+    public static void set(LocalDatabaseEnvironment databaseEnvironment) {
         CONTEXT.set(databaseEnvironment);
     }
 
-    public static DatabaseEnvironment getEnvironment() {
+    public static LocalDatabaseEnvironment getEnvironment() {
         return CONTEXT.get();
     }
 

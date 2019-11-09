@@ -15,8 +15,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.Assert;
-import vincere.etl.config.routing.DataSourceRouter;
-import vincere.etl.config.routing.DatabaseEnvironment;
 import vincere.etl.entity.vinc.AccountantEmail;
 import vincere.etl.repository.CandidateRepository;
 
@@ -30,7 +28,7 @@ import java.util.Properties;
         , transactionManagerRef = "vincTransactionManager")
 @EnableTransactionManagement
 @PropertySource("classpath:application-datasources-local.properties")
-public class VincDataSourceConfiguration {
+public class LocalDataSourceConfiguration {
 
     @Bean
     @ConfigurationProperties("tung.vincere.io.datasource")
@@ -65,10 +63,10 @@ public class VincDataSourceConfiguration {
      */
     @Bean
     public DataSource vincDataSource() {
-        DataSourceRouter router = new DataSourceRouter();
+        LocalDataSourceRouter router = new LocalDataSourceRouter();
         final HashMap<Object, Object> map = new HashMap<>();
-        map.put(DatabaseEnvironment.tung_vincere_io, dsp1DataSource());
-        map.put(DatabaseEnvironment.strivesale_vincere_io, dsp2DataSource());
+        map.put(LocalDatabaseEnvironment.tung_vincere_io, dsp1DataSource());
+        map.put(LocalDatabaseEnvironment.strivesale_vincere_io, dsp2DataSource());
         router.setTargetDataSources(map);
         router.afterPropertiesSet();
         router.setDefaultTargetDataSource(dsp1DataSource());

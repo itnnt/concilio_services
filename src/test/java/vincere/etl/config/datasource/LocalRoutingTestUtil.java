@@ -1,4 +1,4 @@
-package vincere.etl.config.routing;
+package vincere.etl.config.datasource;
 
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -6,14 +6,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import vincere.etl.entity.vinc.AccountantEmail;
 
 import javax.persistence.Entity;
@@ -23,8 +20,8 @@ import java.sql.DriverManager;
 import java.util.EnumSet;
 
 @Component("vincereRoutingTestUtil")
-@PropertySource("classpath:application-datasources-vincere.properties")
-public class VincereRoutingTestUtil {
+@PropertySource("classpath:application-datasources-local.properties")
+public class LocalRoutingTestUtil {
 
     public void createDatabase(String url, String username, String password, String dialect) throws Exception {
         Connection connection = DriverManager.getConnection(url, username, password);

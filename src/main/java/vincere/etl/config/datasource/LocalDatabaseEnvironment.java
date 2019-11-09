@@ -1,6 +1,6 @@
-package vincere.etl.config.routing;
+package vincere.etl.config.datasource;
 
-public enum DatabaseEnvironment {
+public enum LocalDatabaseEnvironment {
     strivesale_vincere_io("strivesale.vincere.io.datasource.url"
             , "strivesale.vincere.io.datasource.username"
             , "strivesale.vincere.io.datasource.password"
@@ -18,7 +18,7 @@ public enum DatabaseEnvironment {
     public final String password;
     public final String dialect;
 
-    DatabaseEnvironment(String url, String username, String password, String dialect) {
+    LocalDatabaseEnvironment(String url, String username, String password, String dialect) {
         this.url = url;
         this.username = username;
         this.password = password;
