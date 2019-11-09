@@ -1,9 +1,9 @@
 package vincere.etl.config.routing;
 
 public enum DatabaseEnvironment {
-    strivesales_vincere_io("strivesales.vincere.io.datasource.url"
-            , "strivesales.vincere.io.datasource.username"
-            , "strivesales.vincere.io.datasource.password"
+    strivesale_vincere_io("strivesale.vincere.io.datasource.url"
+            , "strivesale.vincere.io.datasource.username"
+            , "strivesale.vincere.io.datasource.password"
             , "hibernate.dialect.override"
     ),
     tung_vincere_io("tung.vincere.io.datasource.url"

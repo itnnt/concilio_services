@@ -29,7 +29,7 @@ import java.util.Properties;
         , entityManagerFactoryRef = "vincEntityManager"
         , transactionManagerRef = "vincTransactionManager")
 @EnableTransactionManagement
-@PropertySource("classpath:application-datasources-vincere.properties")
+@PropertySource("classpath:application-datasources-local.properties")
 public class VincDataSourceConfiguration {
 
     @Bean
@@ -68,7 +68,7 @@ public class VincDataSourceConfiguration {
         DataSourceRouter router = new DataSourceRouter();
         final HashMap<Object, Object> map = new HashMap<>();
         map.put(DatabaseEnvironment.tung_vincere_io, dsp1DataSource());
-        map.put(DatabaseEnvironment.strivesales_vincere_io, dsp2DataSource());
+        map.put(DatabaseEnvironment.strivesale_vincere_io, dsp2DataSource());
         router.setTargetDataSources(map);
         router.afterPropertiesSet();
         router.setDefaultTargetDataSource(dsp1DataSource());
