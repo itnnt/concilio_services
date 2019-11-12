@@ -37,7 +37,7 @@ class RemoteRoutingApplicationTests {
             remoteRoutingTestUtil.createDatabase(url, username, password, dialect)
             val createNativeQuery = remoteEntityManager.nativeEntityManagerFactory.createEntityManager().createNativeQuery("SHOW TABLES")
             var resultList = createNativeQuery.resultList
-//            Assertions.assertThat(resultList.size).isEqualTo(1)
+//            Assertions.assertThat(resultList.size).isEqualTo(514)
         }
     }
 
