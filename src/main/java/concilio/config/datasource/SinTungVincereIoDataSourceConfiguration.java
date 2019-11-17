@@ -2,7 +2,7 @@ package concilio.config.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
 import concilio.entity.concilio.Candidate;
-import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
+import concilio.repository.tung.vincere.io.sin.CandidateRepositorySin;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;

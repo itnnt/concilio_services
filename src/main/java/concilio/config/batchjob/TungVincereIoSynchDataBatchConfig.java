@@ -1,7 +1,7 @@
 package concilio.config.batchjob;
 
 import concilio.entity.concilio.Candidate;
-import concilio.repository.local.tung.vincere.io.sin.CandidateRepositorySin;
+import concilio.repository.tung.vincere.io.sin.CandidateRepositorySin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
