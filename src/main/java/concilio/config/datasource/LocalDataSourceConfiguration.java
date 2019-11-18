@@ -1,6 +1,10 @@
-package vincere.etl.config.datasource;
+package concilio.config.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
+import concilio.config.routing.DataSourceRouter;
+import concilio.config.routing.DatabaseEnvironment;
+import concilio.entity.vinc.AccountantEmail;
+import concilio.repository.local.CandidateRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,8 +19,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.Assert;
-import vincere.etl.entity.vinc.AccountantEmail;
-import vincere.etl.repository.local.CandidateRepository;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -32,12 +34,12 @@ public class LocalDataSourceConfiguration {
 
     @Bean
     @ConfigurationProperties("tung.vincere.io.datasource")
-    DataSourceProperties dsp1() {
+    DataSourceProperties localDataSourceProperties1() {
         return new DataSourceProperties();
     }
 
-    private DataSource dsp1DataSource() {
-        return dsp1()
+    private DataSource localDataSource1() {
+        return localDataSourceProperties1()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
                 .build();
@@ -45,12 +47,12 @@ public class LocalDataSourceConfiguration {
 
     @Bean
     @ConfigurationProperties("strivesales.vincere.io.datasource")
-    DataSourceProperties dsp2() {
+    DataSourceProperties localDataSourceProperties2() {
         return new DataSourceProperties();
     }
 
-    private DataSource dsp2DataSource() {
-        return dsp2()
+    private DataSource localDataSource2() {
+        return localDataSourceProperties2()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
                 .build();
@@ -63,13 +65,13 @@ public class LocalDataSourceConfiguration {
      */
     @Bean
     public DataSource vincDataSource() {
-        LocalDataSourceRouter router = new LocalDataSourceRouter();
+        DataSourceRouter router = new DataSourceRouter();
         final HashMap<Object, Object> map = new HashMap<>();
-        map.put(LocalDatabaseEnvironment.tung_vincere_io, dsp1DataSource());
-        map.put(LocalDatabaseEnvironment.strivesale_vincere_io, dsp2DataSource());
+        map.put(DatabaseEnvironment.tung_vincere_io, localDataSource1());
+        map.put(DatabaseEnvironment.strivesale_vincere_io, localDataSource2());
         router.setTargetDataSources(map);
         router.afterPropertiesSet();
-        router.setDefaultTargetDataSource(dsp1DataSource());
+        router.setDefaultTargetDataSource(localDataSource1());
         return router;
     }
 
