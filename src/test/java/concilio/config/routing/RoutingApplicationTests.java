@@ -3,8 +3,10 @@ package concilio.config.routing;
 import concilio.config.batchjob.CustomerBatchConfig;
 import concilio.config.datasource.ConcilioDataSourceConfiguration;
 import concilio.config.datasource.DataSourceConfiguration;
+import concilio.config.datasource.LocalDataSourceConfiguration;
 import concilio.entity.customer.Customer;
 import concilio.repository.customer.CustomerRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.Job;
@@ -15,6 +17,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -28,23 +33,29 @@ public class RoutingApplicationTests {
     @Autowired
     RoutingTestUtil routingTestUtil;
 
-
+    List dbEnv;
+    @Before
+    public void setup() {
+        dbEnv = new ArrayList();
+        dbEnv.add(DatabaseEnvironment.DEVELOPMENT);
+        dbEnv.add(DatabaseEnvironment.TESTING);
+        dbEnv.add(DatabaseEnvironment.PRODUCTION);
+    }
 //    @Autowired
 //    CacheManager cacheManager;
 
     @Test
     public void contextSwitchTest() throws Exception {
         // Create databases for each environment
-        for (DatabaseEnvironment databaseEnvironment : DatabaseEnvironment
-            .values()) {
-            routingTestUtil.createDatabase(databaseEnvironment);
+        for (Object databaseEnvironment : dbEnv) {
+            routingTestUtil.createDatabase((DatabaseEnvironment)databaseEnvironment);
         }
 
 
         // Create a customer in each environment
-        for (DatabaseEnvironment databaseEnvironment : DatabaseEnvironment.values()) {
+        for (Object databaseEnvironment : dbEnv) {
             System.out.println("-------------------" + databaseEnvironment + "------------------");
-            DatabaseContextHolder.set(databaseEnvironment);
+            DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
             Customer devCustomer = new Customer();
             devCustomer.setId(1L);
             devCustomer.setName("Tony Tester " + databaseEnvironment);
@@ -52,8 +63,8 @@ public class RoutingApplicationTests {
             DatabaseContextHolder.clear();
         }
 
-        for (DatabaseEnvironment databaseEnvironment : DatabaseEnvironment.values()) {
-            DatabaseContextHolder.set(databaseEnvironment);
+        for (Object databaseEnvironment : dbEnv) {
+            DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
             assertEquals(1L, customerRepository.findOneByName(("Tony Tester " + databaseEnvironment)).getId().longValue());
 
             Customer customer = customerRepository.findById(1L).get();
@@ -76,7 +87,7 @@ public class RoutingApplicationTests {
     }
 
     @Configuration
-    @Import({RoutingTestUtil.class, CustomerBatchConfig.class, DataSourceConfiguration.class, ConcilioDataSourceConfiguration.class})
+    @Import({RoutingTestUtil.class, CustomerBatchConfig.class, DataSourceConfiguration.class, LocalDataSourceConfiguration.class, ConcilioDataSourceConfiguration.class})
     static class BatchTestConfig {
         @Autowired
         Job customerBatchJob;

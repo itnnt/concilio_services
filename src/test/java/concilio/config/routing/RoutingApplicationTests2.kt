@@ -6,6 +6,7 @@ import concilio.config.datasource.DataSourceConfiguration
 import concilio.entity.customer.Customer
 import concilio.repository.customer.CustomerRepository
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.batch.core.Job
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit4.SpringRunner
+import java.util.ArrayList
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
@@ -26,7 +28,11 @@ class RoutingApplicationTests2 {
     @Autowired
     internal lateinit var routingTestUtil: RoutingTestUtil
 
-
+    internal lateinit var dbEnv: MutableList<*>
+    @Before
+    fun setup() {
+        dbEnv = listOf(DatabaseEnvironment.DEVELOPMENT, DatabaseEnvironment.TESTING, DatabaseEnvironment.PRODUCTION).toMutableList()
+    }
     //    @Autowired
     //    CacheManager cacheManager;
 
@@ -34,16 +40,15 @@ class RoutingApplicationTests2 {
     @Throws(Exception::class)
     fun contextSwitch_createDataSchema_saveRecodeToTables() {
         // Create databases for each environment
-        for (databaseEnvironment in DatabaseEnvironment
-                .values()) {
-            routingTestUtil.createDatabase(databaseEnvironment)
+        for (databaseEnvironment in dbEnv) {
+            routingTestUtil.createDatabase(databaseEnvironment as DatabaseEnvironment)
         }
 
 
         // Create a customer in each environment
-        for (databaseEnvironment in DatabaseEnvironment.values()) {
+        for (databaseEnvironment in dbEnv) {
             println("-------------------$databaseEnvironment------------------")
-            DatabaseContextHolder.set(databaseEnvironment)
+            DatabaseContextHolder.set(databaseEnvironment as DatabaseEnvironment)
             val devCustomer = Customer()
             devCustomer.id = 1L
             devCustomer.name = "Tony Tester $databaseEnvironment"
@@ -51,8 +56,8 @@ class RoutingApplicationTests2 {
             DatabaseContextHolder.clear()
         }
 
-        for (databaseEnvironment in DatabaseEnvironment.values()) {
-            DatabaseContextHolder.set(databaseEnvironment)
+        for (databaseEnvironment in dbEnv) {
+            DatabaseContextHolder.set(databaseEnvironment as DatabaseEnvironment)
             assertEquals(1L, customerRepository.findOneByName("Tony Tester $databaseEnvironment").id.toLong())
 
             val customer = customerRepository.findById(1L).get()
@@ -76,8 +81,8 @@ class RoutingApplicationTests2 {
 
     @Test
     fun contextSwitch_removeRecord() {
-        for (databaseEnvironment in DatabaseEnvironment.values()) {
-            DatabaseContextHolder.set(databaseEnvironment)
+        for (databaseEnvironment in dbEnv) {
+            DatabaseContextHolder.set(databaseEnvironment as DatabaseEnvironment)
             assertNotNull(customerRepository.findOneByName("Tony Tester $databaseEnvironment"))
 
             customerRepository.deleteById(customerRepository.findOneByName("Tony Tester $databaseEnvironment").id)
