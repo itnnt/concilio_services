@@ -1,5 +1,7 @@
-package vincere.etl.config.datasource;
+package concilio.config.routing;
 
+import concilio.entity.local.LocalCandidate;
+import concilio.entity.vinc.Candidate;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -11,7 +13,7 @@ import org.springframework.context.annotation.ClassPathScanningCandidateComponen
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Component;
-import vincere.etl.entity.vinc.AccountantEmail;
+import concilio.entity.vinc.AccountantEmail;
 
 import javax.persistence.Entity;
 import java.io.File;
@@ -35,9 +37,11 @@ public class LocalRoutingTestUtil {
         ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(true);
         scanner.addIncludeFilter(new AnnotationTypeFilter(Entity.class));
 
-        for (BeanDefinition def : scanner.findCandidateComponents(AccountantEmail.class.getPackage().getName())) {
+        // Only create candidate table
+        /* for (BeanDefinition def : scanner.findCandidateComponents(AccountantEmail.class.getPackage().getName())) {
             metadata.addAnnotatedClass(Class.forName(def.getBeanClassName()));
-        }
+        }*/
+        metadata.addAnnotatedClass(LocalCandidate.class);
 
         Metadata mtd = metadata.buildMetadata();
 
