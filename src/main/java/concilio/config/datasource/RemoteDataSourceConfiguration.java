@@ -3,8 +3,8 @@ package concilio.config.datasource;
 import com.zaxxer.hikari.HikariDataSource;
 import concilio.config.routing.DataSourceRouter;
 import concilio.config.routing.DatabaseEnvironment;
-import concilio.entity.local.LocalCandidate;
-import concilio.repository.local.LocalCandidateRepository;
+import concilio.entity.vinc.Candidate;
+import concilio.repository.remote.RemoteCandidateRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,41 +18,40 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.util.Assert;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackageClasses = LocalCandidateRepository.class
-        , entityManagerFactoryRef = "vincEntityManager"
-        , transactionManagerRef = "vincTransactionManager")
+@EnableJpaRepositories(basePackageClasses = RemoteCandidateRepository.class
+        , entityManagerFactoryRef = "remoteEntityManager"
+        , transactionManagerRef = "remoteTransactionManager")
 @EnableTransactionManagement
-@PropertySource("classpath:application-datasources-local.properties")
-public class LocalDataSourceConfiguration {
+@PropertySource("classpath:application-datasources-remote.properties")
+public class RemoteDataSourceConfiguration {
 
     @Bean
-    @ConfigurationProperties("local.tung.vincere.io.datasource")
-    DataSourceProperties localDataSourceProperties1() {
+    @ConfigurationProperties("remote.tung.vincere.io.datasource")
+    DataSourceProperties remoteDsp1() {
         return new DataSourceProperties();
     }
 
-    private DataSource localDataSource1() {
-        return localDataSourceProperties1()
+    private DataSource dsp1DataSource() {
+        return remoteDsp1()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
                 .build();
     }
 
     @Bean
-    @ConfigurationProperties("local.strivesale.vincere.io.datasource")
-    DataSourceProperties localDataSourceProperties2() {
+    @ConfigurationProperties("remote.strivesale.vincere.io.datasource")
+    DataSourceProperties remoteDsp2() {
         return new DataSourceProperties();
     }
 
-    private DataSource localDataSource2() {
-        return localDataSourceProperties2()
+    private DataSource dsp2DataSource() {
+        return remoteDsp2()
                 .initializeDataSourceBuilder()
                 .type(HikariDataSource.class)
                 .build();
@@ -64,28 +63,27 @@ public class LocalDataSourceConfiguration {
      * @return datasource of current context
      */
     @Bean
-    public DataSource vincDataSource() {
+    public DataSource remoteDataSource() {
         DataSourceRouter router = new DataSourceRouter();
         final HashMap<Object, Object> map = new HashMap<>();
-        map.put(DatabaseEnvironment.local_tung_vincere_io, localDataSource1());
-        map.put(DatabaseEnvironment.local_strivesale_vincere_io, localDataSource2());
+        map.put(DatabaseEnvironment.remote_tung_vincere_io, dsp1DataSource());
+        map.put(DatabaseEnvironment.remote_strivesale_vincere_io, dsp2DataSource());
         router.setTargetDataSources(map);
         router.afterPropertiesSet();
-        router.setDefaultTargetDataSource(localDataSource2());
+        router.setDefaultTargetDataSource(dsp1DataSource());
         return router;
     }
 
-    @Bean(name="vincEntityManager")
-    public LocalContainerEntityManagerFactoryBean vincEntityManager(Environment env) {
+    @Bean(name="remoteEntityManager")
+    public LocalContainerEntityManagerFactoryBean remoteEntityManager(Environment env) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(vincDataSource());
+        entityManagerFactoryBean.setDataSource(remoteDataSource());
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan(LocalCandidate.class.getPackage().getName());
+        entityManagerFactoryBean.setPackagesToScan(Candidate.class.getPackage().getName());
 
         Properties prop = new Properties();
-        prop.put("hibernate.dialect", env.getRequiredProperty("local.hibernate.dialect.override"));
-        prop.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("local.hibernate.hbm2ddl.auto.override"));
-//        Assert.isTrue(env.getRequiredProperty("hibernate.hbm2ddl.auto.override").equals("validate"), "expected: validate - " + "actual: " + env.getRequiredProperty("hibernate.hbm2ddl.auto.override"));
+        prop.put("hibernate.dialect", env.getRequiredProperty("remote.hibernate.dialect.override"));
+        prop.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("remote.hibernate.hbm2ddl.auto.override"));
         prop.put("hibernate.ejb.naming_strategy", env.getRequiredProperty("hibernate.ejb.naming_strategy"));
         prop.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         prop.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
@@ -99,10 +97,10 @@ public class LocalDataSourceConfiguration {
     }
 
     @Bean
-    PlatformTransactionManager vincTransactionManager(
-            @Qualifier("vincEntityManager") LocalContainerEntityManagerFactoryBean vincEntityManager
+    PlatformTransactionManager remoteTransactionManager(
+            @Qualifier("remoteEntityManager") LocalContainerEntityManagerFactoryBean remoteEntityManager
     ) {
-        return new JpaTransactionManager(vincEntityManager.getObject());
+        return new JpaTransactionManager(remoteEntityManager.getObject());
     }
 
 }
