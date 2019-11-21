@@ -13,7 +13,7 @@ public class Candidate {
 
   @Id
   @Column(name="id")
-  private long id;
+  private Long id;
 
   @Column(name="first_name")
   private String firstName;
@@ -25,10 +25,10 @@ public class Candidate {
   private String email;
 
   @Column(name="candidate_source_id")
-  private long candidateSourceId;
+  private Long candidateSourceId;
 
   @Column(name="user_account_id")
-  private long userAccountId;
+  private Long userAccountId;
 
   @Column(name="photo_filename")
   private String photoFilename;
@@ -43,13 +43,13 @@ public class Candidate {
   private String comments;
 
   @Column(name="male")
-  private long male;
+  private Long male;
 
   @Column(name="latest_status_change_date")
   private java.sql.Timestamp latestStatusChangeDate;
 
   @Column(name="latest_status")
-  private long latestStatus;
+  private Long latestStatus;
 
   @Column(name="insert_timestamp")
   private java.sql.Timestamp insertTimestamp;
@@ -67,22 +67,22 @@ public class Candidate {
   private String currencyOfSalary;
 
   @Column(name="current_salary")
-  private double currentSalary;
+  private Double currentSalary;
 
   @Column(name="desire_salary")
-  private double desireSalary;
+  private Double desireSalary;
 
   @Column(name="contract_rate")
-  private double contractRate;
+  private Double contractRate;
 
   @Column(name="other_benefits")
   private String otherBenefits;
 
   @Column(name="total_p_a")
-  private double totalPA;
+  private Double totalPA;
 
   @Column(name="source_contact_id")
-  private long sourceContactId;
+  private Long sourceContactId;
 
   @Column(name="first_name_kana")
   private String firstNameKana;
@@ -100,19 +100,19 @@ public class Candidate {
   private String city;
 
   @Column(name="relocate")
-  private long relocate;
+  private Long relocate;
 
   @Column(name="education")
-  private long education;
+  private Long education;
 
   @Column(name="full_time")
-  private long fullTime;
+  private Long fullTime;
 
   @Column(name="country")
   private String country;
 
   @Column(name="industry")
-  private long industry;
+  private Long industry;
 
   @Column(name="linked_in_profile")
   private String linkedInProfile;
@@ -121,7 +121,7 @@ public class Candidate {
   private String presentJob;
 
   @Column(name="year_of_experience")
-  private long yearOfExperience;
+  private Long yearOfExperience;
 
   @Column(name="nationality")
   private String nationality;
@@ -151,7 +151,7 @@ public class Candidate {
   private String eeoVeteranStatus;
 
   @Column(name="eeo_require")
-  private long eeoRequire;
+  private Long eeoRequire;
 
   @Column(name="encrypted_password")
   private String encryptedPassword;
@@ -163,13 +163,13 @@ public class Candidate {
   private String toeicScore;
 
   @Column(name="contract")
-  private long contract;
+  private Long contract;
 
   @Column(name="graduate")
-  private long graduate;
+  private Long graduate;
 
   @Column(name="internship")
-  private long internship;
+  private Long internship;
 
   @Column(name="school_name")
   private String schoolName;
@@ -202,19 +202,19 @@ public class Candidate {
   private String notes1;
 
   @Column(name="candidate_ref_no1")
-  private long candidateRefNo1;
+  private Long candidateRefNo1;
 
   @Column(name="notes2")
   private String notes2;
 
   @Column(name="candidate_ref_no2")
-  private long candidateRefNo2;
+  private Long candidateRefNo2;
 
   @Column(name="notes3")
   private String notes3;
 
   @Column(name="candidate_ref_no3")
-  private long candidateRefNo3;
+  private Long candidateRefNo3;
 
   @Column(name="state")
   private String state;
@@ -223,7 +223,7 @@ public class Candidate {
   private String employeeNumber;
 
   @Column(name="active")
-  private long active;
+  private Long active;
 
   @Column(name="cover_letter")
   private String coverLetter;
@@ -232,16 +232,16 @@ public class Candidate {
   private String currentEmployer;
 
   @Column(name="graduation_year")
-  private long graduationYear;
+  private Long graduationYear;
 
   @Column(name="present_title")
   private String presentTitle;
 
   @Column(name="part_time")
-  private long partTime;
+  private Long partTime;
 
   @Column(name="is_employee_referal")
-  private long isEmployeeReferal;
+  private Long isEmployeeReferal;
 
   @Column(name="passport_no")
   private String passportNo;
@@ -319,7 +319,7 @@ public class Candidate {
   private String countrySpecificDetail;
 
   @Column(name="employee")
-  private long employee;
+  private Long employee;
 
   @Column(name="salary_payroll_id")
   private String salaryPayrollId;
@@ -331,10 +331,10 @@ public class Candidate {
   private String salaryPayGroup;
 
   @Column(name="salary_eligible_for_benefits")
-  private long salaryEligibleForBenefits;
+  private Long salaryEligibleForBenefits;
 
   @Column(name="salary_eligible_for_car")
-  private long salaryEligibleForCar;
+  private Long salaryEligibleForCar;
 
   @Column(name="salary_target_earnings")
   private String salaryTargetEarnings;
@@ -367,19 +367,19 @@ public class Candidate {
   private String employeeLineManagerString;
 
   @Column(name="graduate_high_school")
-  private long graduateHighSchool;
+  private Long graduateHighSchool;
 
   @Column(name="note")
   private String note;
 
   @Column(name="contact_id")
-  private long contactId;
+  private Long contactId;
 
   @Column(name="nickname")
   private String nickname;
 
   @Column(name="maritalstatus")
-  private long maritalstatus;
+  private Long maritalstatus;
 
   @Column(name="objective")
   private String objective;
@@ -457,37 +457,37 @@ public class Candidate {
   private String personalStatements;
 
   @Column(name="availability")
-  private long availability;
+  private Long availability;
 
   @Column(name="heard_from")
-  private long heardFrom;
+  private Long heardFrom;
 
   @Column(name="dependents")
-  private long dependents;
+  private Long dependents;
 
   @Column(name="preferred_email")
-  private long preferredEmail;
+  private Long preferredEmail;
 
   @Column(name="preferred_work_email")
-  private long preferredWorkEmail;
+  private Long preferredWorkEmail;
 
   @Column(name="preferred_phone")
-  private long preferredPhone;
+  private Long preferredPhone;
 
   @Column(name="preferred_mobile_phone")
-  private long preferredMobilePhone;
+  private Long preferredMobilePhone;
 
   @Column(name="preferred_work_phone")
-  private long preferredWorkPhone;
+  private Long preferredWorkPhone;
 
   @Column(name="preferred_home_phone")
-  private long preferredHomePhone;
+  private Long preferredHomePhone;
 
   @Column(name="working_state")
-  private long workingState;
+  private Long workingState;
 
   @Column(name="company_count")
-  private long companyCount;
+  private Long companyCount;
 
   @Column(name="desired_location_json")
   private String desiredLocationJson;
@@ -502,13 +502,13 @@ public class Candidate {
   private String candidateOwnerJson;
 
   @Column(name="tagged_resume_id")
-  private long taggedResumeId;
+  private Long taggedResumeId;
 
   @Column(name="employment_type")
-  private long employmentType;
+  private Long employmentType;
 
   @Column(name="status")
-  private long status;
+  private Long status;
 
   @Column(name="desired_job_type_json")
   private String desiredJobTypeJson;
@@ -523,13 +523,13 @@ public class Candidate {
   private String deletedReason;
 
   @Column(name="deleted_by_user_id")
-  private long deletedByUserId;
+  private Long deletedByUserId;
 
   @Column(name="current_location_id")
-  private long currentLocationId;
+  private Long currentLocationId;
 
   @Column(name="personal_location_id")
-  private long personalLocationId;
+  private Long personalLocationId;
 
   @Column(name="desired_work_location_list")
   private String desiredWorkLocationList;
@@ -538,40 +538,40 @@ public class Candidate {
   private String externalId;
 
   @Column(name="notice_period")
-  private long noticePeriod;
+  private Long noticePeriod;
 
   @Column(name="salary_type")
-  private long salaryType;
+  private Long salaryType;
 
   @Column(name="months_per_year")
-  private double monthsPerYear;
+  private Double monthsPerYear;
 
   @Column(name="present_salary_rate")
-  private double presentSalaryRate;
+  private Double presentSalaryRate;
 
   @Column(name="expected_salary_from")
-  private double expectedSalaryFrom;
+  private Double expectedSalaryFrom;
 
   @Column(name="expected_salary_to")
-  private double expectedSalaryTo;
+  private Double expectedSalaryTo;
 
   @Column(name="no_of_dependents")
-  private long noOfDependents;
+  private Long noOfDependents;
 
   @Column(name="note_by")
-  private long noteBy;
+  private Long noteBy;
 
   @Column(name="note_on")
   private java.sql.Timestamp noteOn;
 
   @Column(name="total_jobs")
-  private long totalJobs;
+  private Long totalJobs;
 
   @Column(name="payslip_email")
   private String payslipEmail;
 
   @Column(name="highest_pcid")
-  private long highestPcid;
+  private Long highestPcid;
 
   @Column(name="country_of_domicile")
   private String countryOfDomicile;
@@ -598,13 +598,13 @@ public class Candidate {
   private java.sql.Timestamp hotEndDate;
 
   @Column(name="current_bonus")
-  private double currentBonus;
+  private Double currentBonus;
 
   @Column(name="desired_bonus")
-  private double desiredBonus;
+  private Double desiredBonus;
 
   @Column(name="desired_contract_rate")
-  private double desiredContractRate;
+  private Double desiredContractRate;
 
   @Column(name="timezone")
   private String timezone;
@@ -628,10 +628,10 @@ public class Candidate {
   private String linkedInResumeContent;
 
   @Column(name="desire_salary_monthly")
-  private double desireSalaryMonthly;
+  private Double desireSalaryMonthly;
 
   @Column(name="payment_type")
-  private long paymentType;
+  private Long paymentType;
 
   @Column(name="company_name")
   private String companyName;
@@ -643,14 +643,14 @@ public class Candidate {
   private String noteBackup;
 
   @Column(name="company_location_id")
-  private long companyLocationId;
+  private Long companyLocationId;
 
 
-  public long getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -678,19 +678,19 @@ public class Candidate {
     this.email = email;
   }
 
-  public long getCandidateSourceId() {
+  public Long getCandidateSourceId() {
     return this.candidateSourceId;
   }
 
-  public void setCandidateSourceId(long candidateSourceId) {
+  public void setCandidateSourceId(Long candidateSourceId) {
     this.candidateSourceId = candidateSourceId;
   }
 
-  public long getUserAccountId() {
+  public Long getUserAccountId() {
     return this.userAccountId;
   }
 
-  public void setUserAccountId(long userAccountId) {
+  public void setUserAccountId(Long userAccountId) {
     this.userAccountId = userAccountId;
   }
 
@@ -726,11 +726,11 @@ public class Candidate {
     this.comments = comments;
   }
 
-  public long getMale() {
+  public Long getMale() {
     return this.male;
   }
 
-  public void setMale(long male) {
+  public void setMale(Long male) {
     this.male = male;
   }
 
@@ -742,11 +742,11 @@ public class Candidate {
     this.latestStatusChangeDate = latestStatusChangeDate;
   }
 
-  public long getLatestStatus() {
+  public Long getLatestStatus() {
     return this.latestStatus;
   }
 
-  public void setLatestStatus(long latestStatus) {
+  public void setLatestStatus(Long latestStatus) {
     this.latestStatus = latestStatus;
   }
 
@@ -790,27 +790,27 @@ public class Candidate {
     this.currencyOfSalary = currencyOfSalary;
   }
 
-  public double getCurrentSalary() {
+  public Double getCurrentSalary() {
     return this.currentSalary;
   }
 
-  public void setCurrentSalary(double currentSalary) {
+  public void setCurrentSalary(Double currentSalary) {
     this.currentSalary = currentSalary;
   }
 
-  public double getDesireSalary() {
+  public Double getDesireSalary() {
     return this.desireSalary;
   }
 
-  public void setDesireSalary(double desireSalary) {
+  public void setDesireSalary(Double desireSalary) {
     this.desireSalary = desireSalary;
   }
 
-  public double getContractRate() {
+  public Double getContractRate() {
     return this.contractRate;
   }
 
-  public void setContractRate(double contractRate) {
+  public void setContractRate(Double contractRate) {
     this.contractRate = contractRate;
   }
 
@@ -822,19 +822,19 @@ public class Candidate {
     this.otherBenefits = otherBenefits;
   }
 
-  public double getTotalPA() {
+  public Double getTotalPA() {
     return this.totalPA;
   }
 
-  public void setTotalPA(double totalPA) {
+  public void setTotalPA(Double totalPA) {
     this.totalPA = totalPA;
   }
 
-  public long getSourceContactId() {
+  public Long getSourceContactId() {
     return this.sourceContactId;
   }
 
-  public void setSourceContactId(long sourceContactId) {
+  public void setSourceContactId(Long sourceContactId) {
     this.sourceContactId = sourceContactId;
   }
 
@@ -878,27 +878,27 @@ public class Candidate {
     this.city = city;
   }
 
-  public long getRelocate() {
+  public Long getRelocate() {
     return this.relocate;
   }
 
-  public void setRelocate(long relocate) {
+  public void setRelocate(Long relocate) {
     this.relocate = relocate;
   }
 
-  public long getEducation() {
+  public Long getEducation() {
     return this.education;
   }
 
-  public void setEducation(long education) {
+  public void setEducation(Long education) {
     this.education = education;
   }
 
-  public long getFullTime() {
+  public Long getFullTime() {
     return this.fullTime;
   }
 
-  public void setFullTime(long fullTime) {
+  public void setFullTime(Long fullTime) {
     this.fullTime = fullTime;
   }
 
@@ -910,11 +910,11 @@ public class Candidate {
     this.country = country;
   }
 
-  public long getIndustry() {
+  public Long getIndustry() {
     return this.industry;
   }
 
-  public void setIndustry(long industry) {
+  public void setIndustry(Long industry) {
     this.industry = industry;
   }
 
@@ -934,11 +934,11 @@ public class Candidate {
     this.presentJob = presentJob;
   }
 
-  public long getYearOfExperience() {
+  public Long getYearOfExperience() {
     return this.yearOfExperience;
   }
 
-  public void setYearOfExperience(long yearOfExperience) {
+  public void setYearOfExperience(Long yearOfExperience) {
     this.yearOfExperience = yearOfExperience;
   }
 
@@ -1014,11 +1014,11 @@ public class Candidate {
     this.eeoVeteranStatus = eeoVeteranStatus;
   }
 
-  public long getEeoRequire() {
+  public Long getEeoRequire() {
     return this.eeoRequire;
   }
 
-  public void setEeoRequire(long eeoRequire) {
+  public void setEeoRequire(Long eeoRequire) {
     this.eeoRequire = eeoRequire;
   }
 
@@ -1046,27 +1046,27 @@ public class Candidate {
     this.toeicScore = toeicScore;
   }
 
-  public long getContract() {
+  public Long getContract() {
     return this.contract;
   }
 
-  public void setContract(long contract) {
+  public void setContract(Long contract) {
     this.contract = contract;
   }
 
-  public long getGraduate() {
+  public Long getGraduate() {
     return this.graduate;
   }
 
-  public void setGraduate(long graduate) {
+  public void setGraduate(Long graduate) {
     this.graduate = graduate;
   }
 
-  public long getInternship() {
+  public Long getInternship() {
     return this.internship;
   }
 
-  public void setInternship(long internship) {
+  public void setInternship(Long internship) {
     this.internship = internship;
   }
 
@@ -1150,11 +1150,11 @@ public class Candidate {
     this.notes1 = notes1;
   }
 
-  public long getCandidateRefNo1() {
+  public Long getCandidateRefNo1() {
     return this.candidateRefNo1;
   }
 
-  public void setCandidateRefNo1(long candidateRefNo1) {
+  public void setCandidateRefNo1(Long candidateRefNo1) {
     this.candidateRefNo1 = candidateRefNo1;
   }
 
@@ -1166,11 +1166,11 @@ public class Candidate {
     this.notes2 = notes2;
   }
 
-  public long getCandidateRefNo2() {
+  public Long getCandidateRefNo2() {
     return this.candidateRefNo2;
   }
 
-  public void setCandidateRefNo2(long candidateRefNo2) {
+  public void setCandidateRefNo2(Long candidateRefNo2) {
     this.candidateRefNo2 = candidateRefNo2;
   }
 
@@ -1182,11 +1182,11 @@ public class Candidate {
     this.notes3 = notes3;
   }
 
-  public long getCandidateRefNo3() {
+  public Long getCandidateRefNo3() {
     return this.candidateRefNo3;
   }
 
-  public void setCandidateRefNo3(long candidateRefNo3) {
+  public void setCandidateRefNo3(Long candidateRefNo3) {
     this.candidateRefNo3 = candidateRefNo3;
   }
 
@@ -1206,11 +1206,11 @@ public class Candidate {
     this.employeeNumber = employeeNumber;
   }
 
-  public long getActive() {
+  public Long getActive() {
     return this.active;
   }
 
-  public void setActive(long active) {
+  public void setActive(Long active) {
     this.active = active;
   }
 
@@ -1230,11 +1230,11 @@ public class Candidate {
     this.currentEmployer = currentEmployer;
   }
 
-  public long getGraduationYear() {
+  public Long getGraduationYear() {
     return this.graduationYear;
   }
 
-  public void setGraduationYear(long graduationYear) {
+  public void setGraduationYear(Long graduationYear) {
     this.graduationYear = graduationYear;
   }
 
@@ -1246,19 +1246,19 @@ public class Candidate {
     this.presentTitle = presentTitle;
   }
 
-  public long getPartTime() {
+  public Long getPartTime() {
     return this.partTime;
   }
 
-  public void setPartTime(long partTime) {
+  public void setPartTime(Long partTime) {
     this.partTime = partTime;
   }
 
-  public long getIsEmployeeReferal() {
+  public Long getIsEmployeeReferal() {
     return this.isEmployeeReferal;
   }
 
-  public void setIsEmployeeReferal(long isEmployeeReferal) {
+  public void setIsEmployeeReferal(Long isEmployeeReferal) {
     this.isEmployeeReferal = isEmployeeReferal;
   }
 
@@ -1462,11 +1462,11 @@ public class Candidate {
     this.countrySpecificDetail = countrySpecificDetail;
   }
 
-  public long getEmployee() {
+  public Long getEmployee() {
     return this.employee;
   }
 
-  public void setEmployee(long employee) {
+  public void setEmployee(Long employee) {
     this.employee = employee;
   }
 
@@ -1494,19 +1494,19 @@ public class Candidate {
     this.salaryPayGroup = salaryPayGroup;
   }
 
-  public long getSalaryEligibleForBenefits() {
+  public Long getSalaryEligibleForBenefits() {
     return this.salaryEligibleForBenefits;
   }
 
-  public void setSalaryEligibleForBenefits(long salaryEligibleForBenefits) {
+  public void setSalaryEligibleForBenefits(Long salaryEligibleForBenefits) {
     this.salaryEligibleForBenefits = salaryEligibleForBenefits;
   }
 
-  public long getSalaryEligibleForCar() {
+  public Long getSalaryEligibleForCar() {
     return this.salaryEligibleForCar;
   }
 
-  public void setSalaryEligibleForCar(long salaryEligibleForCar) {
+  public void setSalaryEligibleForCar(Long salaryEligibleForCar) {
     this.salaryEligibleForCar = salaryEligibleForCar;
   }
 
@@ -1590,11 +1590,11 @@ public class Candidate {
     this.employeeLineManagerString = employeeLineManagerString;
   }
 
-  public long getGraduateHighSchool() {
+  public Long getGraduateHighSchool() {
     return this.graduateHighSchool;
   }
 
-  public void setGraduateHighSchool(long graduateHighSchool) {
+  public void setGraduateHighSchool(Long graduateHighSchool) {
     this.graduateHighSchool = graduateHighSchool;
   }
 
@@ -1606,11 +1606,11 @@ public class Candidate {
     this.note = note;
   }
 
-  public long getContactId() {
+  public Long getContactId() {
     return this.contactId;
   }
 
-  public void setContactId(long contactId) {
+  public void setContactId(Long contactId) {
     this.contactId = contactId;
   }
 
@@ -1622,11 +1622,11 @@ public class Candidate {
     this.nickname = nickname;
   }
 
-  public long getMaritalstatus() {
+  public Long getMaritalstatus() {
     return this.maritalstatus;
   }
 
-  public void setMaritalstatus(long maritalstatus) {
+  public void setMaritalstatus(Long maritalstatus) {
     this.maritalstatus = maritalstatus;
   }
 
@@ -1830,91 +1830,91 @@ public class Candidate {
     this.personalStatements = personalStatements;
   }
 
-  public long getAvailability() {
+  public Long getAvailability() {
     return this.availability;
   }
 
-  public void setAvailability(long availability) {
+  public void setAvailability(Long availability) {
     this.availability = availability;
   }
 
-  public long getHeardFrom() {
+  public Long getHeardFrom() {
     return this.heardFrom;
   }
 
-  public void setHeardFrom(long heardFrom) {
+  public void setHeardFrom(Long heardFrom) {
     this.heardFrom = heardFrom;
   }
 
-  public long getDependents() {
+  public Long getDependents() {
     return this.dependents;
   }
 
-  public void setDependents(long dependents) {
+  public void setDependents(Long dependents) {
     this.dependents = dependents;
   }
 
-  public long getPreferredEmail() {
+  public Long getPreferredEmail() {
     return this.preferredEmail;
   }
 
-  public void setPreferredEmail(long preferredEmail) {
+  public void setPreferredEmail(Long preferredEmail) {
     this.preferredEmail = preferredEmail;
   }
 
-  public long getPreferredWorkEmail() {
+  public Long getPreferredWorkEmail() {
     return this.preferredWorkEmail;
   }
 
-  public void setPreferredWorkEmail(long preferredWorkEmail) {
+  public void setPreferredWorkEmail(Long preferredWorkEmail) {
     this.preferredWorkEmail = preferredWorkEmail;
   }
 
-  public long getPreferredPhone() {
+  public Long getPreferredPhone() {
     return this.preferredPhone;
   }
 
-  public void setPreferredPhone(long preferredPhone) {
+  public void setPreferredPhone(Long preferredPhone) {
     this.preferredPhone = preferredPhone;
   }
 
-  public long getPreferredMobilePhone() {
+  public Long getPreferredMobilePhone() {
     return this.preferredMobilePhone;
   }
 
-  public void setPreferredMobilePhone(long preferredMobilePhone) {
+  public void setPreferredMobilePhone(Long preferredMobilePhone) {
     this.preferredMobilePhone = preferredMobilePhone;
   }
 
-  public long getPreferredWorkPhone() {
+  public Long getPreferredWorkPhone() {
     return this.preferredWorkPhone;
   }
 
-  public void setPreferredWorkPhone(long preferredWorkPhone) {
+  public void setPreferredWorkPhone(Long preferredWorkPhone) {
     this.preferredWorkPhone = preferredWorkPhone;
   }
 
-  public long getPreferredHomePhone() {
+  public Long getPreferredHomePhone() {
     return this.preferredHomePhone;
   }
 
-  public void setPreferredHomePhone(long preferredHomePhone) {
+  public void setPreferredHomePhone(Long preferredHomePhone) {
     this.preferredHomePhone = preferredHomePhone;
   }
 
-  public long getWorkingState() {
+  public Long getWorkingState() {
     return this.workingState;
   }
 
-  public void setWorkingState(long workingState) {
+  public void setWorkingState(Long workingState) {
     this.workingState = workingState;
   }
 
-  public long getCompanyCount() {
+  public Long getCompanyCount() {
     return this.companyCount;
   }
 
-  public void setCompanyCount(long companyCount) {
+  public void setCompanyCount(Long companyCount) {
     this.companyCount = companyCount;
   }
 
@@ -1950,27 +1950,27 @@ public class Candidate {
     this.candidateOwnerJson = candidateOwnerJson;
   }
 
-  public long getTaggedResumeId() {
+  public Long getTaggedResumeId() {
     return this.taggedResumeId;
   }
 
-  public void setTaggedResumeId(long taggedResumeId) {
+  public void setTaggedResumeId(Long taggedResumeId) {
     this.taggedResumeId = taggedResumeId;
   }
 
-  public long getEmploymentType() {
+  public Long getEmploymentType() {
     return this.employmentType;
   }
 
-  public void setEmploymentType(long employmentType) {
+  public void setEmploymentType(Long employmentType) {
     this.employmentType = employmentType;
   }
 
-  public long getStatus() {
+  public Long getStatus() {
     return this.status;
   }
 
-  public void setStatus(long status) {
+  public void setStatus(Long status) {
     this.status = status;
   }
 
@@ -2006,27 +2006,27 @@ public class Candidate {
     this.deletedReason = deletedReason;
   }
 
-  public long getDeletedByUserId() {
+  public Long getDeletedByUserId() {
     return this.deletedByUserId;
   }
 
-  public void setDeletedByUserId(long deletedByUserId) {
+  public void setDeletedByUserId(Long deletedByUserId) {
     this.deletedByUserId = deletedByUserId;
   }
 
-  public long getCurrentLocationId() {
+  public Long getCurrentLocationId() {
     return this.currentLocationId;
   }
 
-  public void setCurrentLocationId(long currentLocationId) {
+  public void setCurrentLocationId(Long currentLocationId) {
     this.currentLocationId = currentLocationId;
   }
 
-  public long getPersonalLocationId() {
+  public Long getPersonalLocationId() {
     return this.personalLocationId;
   }
 
-  public void setPersonalLocationId(long personalLocationId) {
+  public void setPersonalLocationId(Long personalLocationId) {
     this.personalLocationId = personalLocationId;
   }
 
@@ -2046,67 +2046,67 @@ public class Candidate {
     this.externalId = externalId;
   }
 
-  public long getNoticePeriod() {
+  public Long getNoticePeriod() {
     return this.noticePeriod;
   }
 
-  public void setNoticePeriod(long noticePeriod) {
+  public void setNoticePeriod(Long noticePeriod) {
     this.noticePeriod = noticePeriod;
   }
 
-  public long getSalaryType() {
+  public Long getSalaryType() {
     return this.salaryType;
   }
 
-  public void setSalaryType(long salaryType) {
+  public void setSalaryType(Long salaryType) {
     this.salaryType = salaryType;
   }
 
-  public double getMonthsPerYear() {
+  public Double getMonthsPerYear() {
     return this.monthsPerYear;
   }
 
-  public void setMonthsPerYear(double monthsPerYear) {
+  public void setMonthsPerYear(Double monthsPerYear) {
     this.monthsPerYear = monthsPerYear;
   }
 
-  public double getPresentSalaryRate() {
+  public Double getPresentSalaryRate() {
     return this.presentSalaryRate;
   }
 
-  public void setPresentSalaryRate(double presentSalaryRate) {
+  public void setPresentSalaryRate(Double presentSalaryRate) {
     this.presentSalaryRate = presentSalaryRate;
   }
 
-  public double getExpectedSalaryFrom() {
+  public Double getExpectedSalaryFrom() {
     return this.expectedSalaryFrom;
   }
 
-  public void setExpectedSalaryFrom(double expectedSalaryFrom) {
+  public void setExpectedSalaryFrom(Double expectedSalaryFrom) {
     this.expectedSalaryFrom = expectedSalaryFrom;
   }
 
-  public double getExpectedSalaryTo() {
+  public Double getExpectedSalaryTo() {
     return this.expectedSalaryTo;
   }
 
-  public void setExpectedSalaryTo(double expectedSalaryTo) {
+  public void setExpectedSalaryTo(Double expectedSalaryTo) {
     this.expectedSalaryTo = expectedSalaryTo;
   }
 
-  public long getNoOfDependents() {
+  public Long getNoOfDependents() {
     return this.noOfDependents;
   }
 
-  public void setNoOfDependents(long noOfDependents) {
+  public void setNoOfDependents(Long noOfDependents) {
     this.noOfDependents = noOfDependents;
   }
 
-  public long getNoteBy() {
+  public Long getNoteBy() {
     return this.noteBy;
   }
 
-  public void setNoteBy(long noteBy) {
+  public void setNoteBy(Long noteBy) {
     this.noteBy = noteBy;
   }
 
@@ -2118,11 +2118,11 @@ public class Candidate {
     this.noteOn = noteOn;
   }
 
-  public long getTotalJobs() {
+  public Long getTotalJobs() {
     return this.totalJobs;
   }
 
-  public void setTotalJobs(long totalJobs) {
+  public void setTotalJobs(Long totalJobs) {
     this.totalJobs = totalJobs;
   }
 
@@ -2134,11 +2134,11 @@ public class Candidate {
     this.payslipEmail = payslipEmail;
   }
 
-  public long getHighestPcid() {
+  public Long getHighestPcid() {
     return this.highestPcid;
   }
 
-  public void setHighestPcid(long highestPcid) {
+  public void setHighestPcid(Long highestPcid) {
     this.highestPcid = highestPcid;
   }
 
@@ -2206,27 +2206,27 @@ public class Candidate {
     this.hotEndDate = hotEndDate;
   }
 
-  public double getCurrentBonus() {
+  public Double getCurrentBonus() {
     return this.currentBonus;
   }
 
-  public void setCurrentBonus(double currentBonus) {
+  public void setCurrentBonus(Double currentBonus) {
     this.currentBonus = currentBonus;
   }
 
-  public double getDesiredBonus() {
+  public Double getDesiredBonus() {
     return this.desiredBonus;
   }
 
-  public void setDesiredBonus(double desiredBonus) {
+  public void setDesiredBonus(Double desiredBonus) {
     this.desiredBonus = desiredBonus;
   }
 
-  public double getDesiredContractRate() {
+  public Double getDesiredContractRate() {
     return this.desiredContractRate;
   }
 
-  public void setDesiredContractRate(double desiredContractRate) {
+  public void setDesiredContractRate(Double desiredContractRate) {
     this.desiredContractRate = desiredContractRate;
   }
 
@@ -2286,19 +2286,19 @@ public class Candidate {
     this.linkedInResumeContent = linkedInResumeContent;
   }
 
-  public double getDesireSalaryMonthly() {
+  public Double getDesireSalaryMonthly() {
     return this.desireSalaryMonthly;
   }
 
-  public void setDesireSalaryMonthly(double desireSalaryMonthly) {
+  public void setDesireSalaryMonthly(Double desireSalaryMonthly) {
     this.desireSalaryMonthly = desireSalaryMonthly;
   }
 
-  public long getPaymentType() {
+  public Long getPaymentType() {
     return this.paymentType;
   }
 
-  public void setPaymentType(long paymentType) {
+  public void setPaymentType(Long paymentType) {
     this.paymentType = paymentType;
   }
 
@@ -2326,11 +2326,11 @@ public class Candidate {
     this.noteBackup = noteBackup;
   }
 
-  public long getCompanyLocationId() {
+  public Long getCompanyLocationId() {
     return this.companyLocationId;
   }
 
-  public void setCompanyLocationId(long companyLocationId) {
+  public void setCompanyLocationId(Long companyLocationId) {
     this.companyLocationId = companyLocationId;
   }
 }
