@@ -7,6 +7,7 @@ import concilio.config.datasource.RemoteDataSourceConfiguration;
 import concilio.entity.vinc.Candidate;
 import concilio.repository.local.LocalCandidateRepository;
 import concilio.repository.remote.RemoteCandidateRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -48,14 +49,14 @@ public class RemoteRoutingApplicationTests {
         dbEnv.add(DatabaseEnvironment.remote_strivesale_vincere_io);
     }
 
-    @Test
+   /* @Test
     public void test1_contextSwitch_removeRecords() {
         for (Object databaseEnvironment : dbEnv) {
             DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
             remoteCandidateRepository.deleteAll();
             Assert.assertEquals(0, remoteCandidateRepository.findAll().size());
         }
-    }
+    }*/
 
     @Test
     public void test2_contextSwitch_saveNewRecords() throws Exception {
@@ -90,8 +91,8 @@ public class RemoteRoutingApplicationTests {
 
         for (Object databaseEnvironment : dbEnv) {
             DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
-            assertEquals(1L, remoteCandidateRepository.findById(1L).get().getId());
-            assertEquals(2L, remoteCandidateRepository.findById(2L).get().getId());
+            Assertions.assertThat(1L).isEqualTo(remoteCandidateRepository.findById(1L).get().getId());
+            Assertions.assertThat(2L).isEqualTo(remoteCandidateRepository.findById(2L).get().getId());
 
             Candidate localCandidate = remoteCandidateRepository.findById(1L).get();
             System.out.println("--------------------------------------------------------");

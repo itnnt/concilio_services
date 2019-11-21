@@ -6,6 +6,7 @@ import concilio.config.datasource.LocalDataSourceConfiguration;
 import concilio.config.datasource.RemoteDataSourceConfiguration;
 import concilio.entity.local.LocalCandidate;
 import concilio.repository.local.LocalCandidateRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -91,8 +92,8 @@ public class LocalRoutingApplicationTests {
 
         for (Object databaseEnvironment : dbEnv) {
             DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
-            assertEquals(1L, localCandidateRepository.findById(1L).get().getId());
-            assertEquals(2L, localCandidateRepository.findById(2L).get().getId());
+            Assertions.assertThat(1L).isEqualTo(localCandidateRepository.findById(1L).get().getId());
+            Assertions.assertThat(2L).isEqualTo(localCandidateRepository.findById(2L).get().getId());
 
             LocalCandidate localCandidate = localCandidateRepository.findById(1L).get();
             System.out.println("--------------------------------------------------------");
