@@ -1,5 +1,7 @@
 package concilio.config.batchjob;
 
+import concilio.config.routing.DatabaseContextHolder;
+import concilio.config.routing.DatabaseEnvironment;
 import concilio.entity.local.LocalCandidate;
 import concilio.entity.vinc.Candidate;
 import concilio.repository.local.LocalCandidateRepository;
@@ -101,6 +103,8 @@ public class CandidateSynchBatchConfig {
         return new ItemWriter<LocalCandidate>() {
             @Override
             public void write(List<? extends LocalCandidate> list) throws Exception {
+                DatabaseContextHolder.set(DatabaseEnvironment.local_tung_vincere_io);
+
                 localCandidateRepository.saveAll(list);
             }
         };
