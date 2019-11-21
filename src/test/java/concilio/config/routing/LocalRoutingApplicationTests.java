@@ -43,10 +43,21 @@ public class LocalRoutingApplicationTests {
 
     List dbEnv;
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         dbEnv = new ArrayList();
         dbEnv.add(DatabaseEnvironment.local_tung_vincere_io);
         dbEnv.add(DatabaseEnvironment.local_strivesale_vincere_io);
+
+        // Create databases for each environment
+        for (Object databaseEnvironment : dbEnv) {
+            DatabaseEnvironment currentDbEnv = (DatabaseEnvironment) databaseEnvironment;
+            String url = env.getRequiredProperty(currentDbEnv.url);
+            String username = env.getRequiredProperty(currentDbEnv.username);
+            String password = env.getRequiredProperty(currentDbEnv.password);
+            String dialect = env.getRequiredProperty(currentDbEnv.dialect);
+
+            vincereRoutingTestUtil.createDatabase(url, username, password, dialect);
+        }
     }
 
     @Test
@@ -60,17 +71,6 @@ public class LocalRoutingApplicationTests {
 
     @Test
     public void test2_contextSwitch_saveNewRecords() throws Exception {
-        // Create databases for each environment
-        /*for (Object databaseEnvironment : dbEnv) {
-            DatabaseEnvironment currentDbEnv = (DatabaseEnvironment) databaseEnvironment;
-            String url = env.getRequiredProperty(currentDbEnv.url);
-            String username = env.getRequiredProperty(currentDbEnv.username);
-            String password = env.getRequiredProperty(currentDbEnv.password);
-            String dialect = env.getRequiredProperty(currentDbEnv.dialect);
-
-            vincereRoutingTestUtil.createDatabase(url, username, password, dialect);
-        }*/
-
         // Create a customer in each environment
         for (Object databaseEnvironment : dbEnv) {
             System.out.println("-------------------" + databaseEnvironment + "------------------");
