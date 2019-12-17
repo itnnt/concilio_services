@@ -9,15 +9,14 @@ import concilio.config.routing.LocalRoutingTestUtil;
 import concilio.entity.vinc.Candidate;
 import concilio.repository.local.LocalCandidateRepository;
 import concilio.repository.remote.RemoteCandidateRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobInstance;
+import org.springframework.batch.core.*;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,16 +60,16 @@ public class CandidateSynchBatchConfigTests {
         dbEnv.add(DatabaseEnvironment.remote_strivesale_vincere_io);
     }
 
-    @Test
+  /*  @Test
     public void test1_contextSwitch_removeRecords() {
         for (Object databaseEnvironment : dbEnv) {
             DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
             remoteCandidateRepository.deleteAll();
             Assert.assertEquals(0, remoteCandidateRepository.findAll().size());
         }
-    }
+    }*/
 
-    @Test
+//    @Test
     public void test2_contextSwitch_saveNewRecords() throws Exception {
         // Create databases for each environment
         /*for (Object databaseEnvironment : dbEnv) {
@@ -102,8 +102,8 @@ public class CandidateSynchBatchConfigTests {
 
         for (Object databaseEnvironment : dbEnv) {
             DatabaseContextHolder.set((DatabaseEnvironment)databaseEnvironment);
-            assertEquals(1L, remoteCandidateRepository.findById(1L).get().getId());
-            assertEquals(2L, remoteCandidateRepository.findById(2L).get().getId());
+            Assertions.assertThat(1L).isEqualTo(remoteCandidateRepository.findById(1L).get().getId());
+            Assertions.assertThat(2L).isEqualTo(remoteCandidateRepository.findById(2L).get().getId());
 
             Candidate localCandidate = remoteCandidateRepository.findById(1L).get();
             System.out.println("--------------------------------------------------------");
@@ -116,7 +116,13 @@ public class CandidateSynchBatchConfigTests {
     public void test3_runJobCandidateSynch() throws Exception {
         List<JobInstance> jobInstanceBefore = jobExplorer.getJobInstances("jobCandidateSynch", 0, Integer.MAX_VALUE);
 
-        JobExecution jobExecution = jobLauncherTestUtils.launchJob();
+        JobParametersBuilder jobBuilder= new JobParametersBuilder();
+        jobBuilder.addString("sourceProfile","PassedStudents");
+        jobBuilder.addString("destinProfile","StudentReport");
+        jobBuilder.addString("timeRun", String.valueOf(new Date()));
+        JobParameters jobParameters =jobBuilder.toJobParameters();
+
+        JobExecution jobExecution = jobLauncherTestUtils.launchJob(jobParameters);
         assertThat(jobExecution.getExitStatus().getExitCode()).isEqualTo("COMPLETED");
 
         // make sure spring batch logged execution info to meta data schema
